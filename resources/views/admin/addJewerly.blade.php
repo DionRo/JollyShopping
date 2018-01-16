@@ -8,7 +8,7 @@
                 <li>{{$error}}</li>
             @endforeach
         </ul>
-        <h4>Jewerly toevoegen</h4>
+        <h4>Sieraad toevoegen</h4>
         <div class="form">
             <form class="flex flex-between" action="{{action('accessoriesController@store')}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
