@@ -22,6 +22,13 @@
                                 <input type="submit" value="Accessoires">
                             </form>
                         </li>
+                        <li>
+                            <form action="{{action('pagesController@filterProducts')}}">
+                                {{csrf_field()}}
+                                <input type="hidden" name="type" value="allJewerlies">
+                                <input type="submit" value="Sieraden">
+                            </form>
+                        </li>
                     @elseif($type == 'clothing')
                         <form class="product-filter" action="{{action('pagesController@filterProducts')}}">
                             {{csrf_field()}}
@@ -70,19 +77,13 @@
                             <input type="hidden" name="type" value="clothing">
                             <input type="submit" value="Save" class="submit">
                         </form>
-                        <form class="product-filter" action="{{action('pagesController@filterProducts')}}">
-                            {{csrf_field()}}
-                            <input type="hidden" name="type" value="allAccessories">
-                            <input type="submit" value="Accessoires">
-                        </form>
-                    @elseif($type == 'accessories')
                         <li>
-                            <form class="product-filter" action="{{action('pagesController@filterProducts')}}">
+                            <form action="{{action('pagesController@products')}}">
                                 {{csrf_field()}}
-                                <input type="hidden" name="type" value="allClothing">
-                                <input type="submit" value="Kleren">
+                                <input type="submit" value="Ga terug">
                             </form>
                         </li>
+                    @elseif($type == 'accessories')
                         <form class="product-filter" action="{{action('pagesController@filterProducts')}}">
                             {{csrf_field()}}
                             <input type="hidden" name="type" value="allAccessories">
@@ -121,6 +122,50 @@
                             <input type="hidden" name="type" value="accessory">
                             <input type="submit" value="Save" class="submit">
                         </form>
+                        <li>
+                            <form action="{{action('pagesController@products')}}">
+                                {{csrf_field()}}
+                                <input type="submit" value="Ga terug">
+                            </form>
+                        </li>
+                    @elseif($type == 'jewerly')
+                        <li>
+                            <form action="{{action('pagesController@filterProducts')}}">
+                                {{csrf_field()}}
+                                <input type="hidden" name="type" value="allJewerlies">
+                                <input type="submit" value="Sieraden">
+                            </form>
+                        </li>
+                        <form action="{{action('pagesController@filterProducts')}}">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <label for="categories"></label>
+                                <select name="categories" id="categories" value="{{old('categories')}}">
+                                    <option value="" @if(!isset($request->categories)) selected @endif hidden>Categorie</option>
+                                    @for($i = 0; $i < count($categories); $i++)
+                                        <option value="{{$categories[$i]->id}}" @if(isset($request->categories)) @if(($request->categories) == $categories[$i]->id) selected @endif @endif>{{$categories[$i]->name}} </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="form-group flex">
+                                <div>
+                                    <label for="minPrice">Min Prijs</label>
+                                    <input type="number" name="minPrice" id="minPrice" min="0" max="499" @if(isset($request->minPrice)) value="{{$request->minPrice}}" @else value="0" @endif>
+                                </div>
+                                <div>
+                                    <label for="maxPrice">Max Prijs</label>
+                                    <input type="number" name="maxPrice" id="maxPrice" min="1" max="500" @if(isset($request->maxPrice)) value="{{$request->maxPrice}}" @else value="500" @endif>
+                                </div>
+                            </div>
+                            <input type="hidden" name="type" value="jewerly">
+                            <input type="submit" value="Save" class="submit">
+                        </form>
+                        <li>
+                            <form action="{{action('pagesController@products')}}">
+                                {{csrf_field()}}
+                                <input type="submit" value="Ga terug">
+                            </form>
+                        </li>
                     @endif
                 </ul>
             </div>

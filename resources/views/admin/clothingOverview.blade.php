@@ -8,7 +8,7 @@
             @foreach($clothes as $garment)
                 <li>
                     <div class="flex">
-                        <img src="../{{$garment->picture}}" alt="">
+                        <img src="{{$garment->picture}}" alt="">
                         <div>
                             <h5>{{$garment->name}}</h5>
                             <p>Categorie: {{$garment->category->name}}</p>

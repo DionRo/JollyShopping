@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class accessoriesController extends Controller
+class jewerlyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +19,11 @@ class accessoriesController extends Controller
 
     public function index()
     {
-        $products = \App\Product::where('type', '=', 'accessory')->paginate(9);
+        $products = \App\Product::where('type', '=', 'jewerly')->paginate(9);
         $categories = \App\Category::select('*')
-            ->where('type', '=', 'accessory')
+            ->where('type', '=', 'jewerly')
             ->get();
-        $type = 'accessories';
+        $type = 'jewerly';
 
         return view('products')
             ->with('products', $products)
@@ -39,15 +39,13 @@ class accessoriesController extends Controller
     public function create()
     {
         $admin = \App\Admin::find(1);
-        $colors = ['Zwart', 'Wit', 'Rood', 'Groen', 'Blauw', 'Bruin', 'Geel', 'Oranje', 'Grijs'];
         $categories = \App\Category::select('*')
-            ->where('type', '=', 'accessory')
+            ->where('type', '=', 'Jewelry')
             ->get();
 
-        return view('admin/addAccessory')
+        return view('admin/addJewerly')
             ->with('admin', $admin)
-            ->with('categories', $categories)
-            ->with('colors', $colors);
+            ->with('categories', $categories);
     }
 
     /**
@@ -79,13 +77,13 @@ class accessoriesController extends Controller
         $accessories->price = $request->price;
         $accessories->stock = $request->stock;
         $accessories->description = $request->description;
-        $accessories->type = 'accessory';
+        $accessories->type = 'jewerly';
 
         $path = $request->file('image');
-            
+
         // File and new size
         $filename = $path;
-        
+
         // Content type
         header('Content-Type: image/jpeg');
 
@@ -104,7 +102,7 @@ class accessoriesController extends Controller
         $test = public_path("img");
         // Output
         imagejpeg($thumb , "img/{$request->file('image')->hashName()}");
-    
+
         $accessories->picture = "/img/".$request->file('image')->hashName();
 
         $accessories->save();
@@ -140,7 +138,7 @@ class accessoriesController extends Controller
         $product = \App\Product::find($id);
         $discount = number_format($product->price * (1 - ($product->discount / 100)), 2);
 
-        return view('/admin/showAccessory')
+        return view('/admin/showJewerly')
             ->with('admin', $admin)
             ->with('product', $product)
             ->with('discount', $discount);
@@ -156,14 +154,12 @@ class accessoriesController extends Controller
     {
         $admin = \App\Admin::find(1);
         $product = \App\Product::find($id);
-        $colors = ['Zwart', 'Wit', 'Rood', 'Groen', 'Blauw', 'Bruin', 'Geel', 'Oranje', 'Grijs'];
-        $categories = \App\Category::select('*')->where('type', '=', 'accessory')->get();
+        $categories = \App\Category::select('*')->where('type', '=', 'Jewelry')->get();
 
-        return view('/admin/editAccessory')
+        return view('/admin/editJewerly')
             ->with('admin', $admin)
             ->with('product', $product)
-            ->with('categories', $categories)
-            ->with('colors', $colors);
+            ->with('categories', $categories);
     }
 
     /**
@@ -192,7 +188,7 @@ class accessoriesController extends Controller
 
         if($accessories->name != $request->name){
             $request->validate([
-               'name' => 'unique:products,name'
+                'name' => 'unique:products,name'
             ]);
         }
 
@@ -225,7 +221,7 @@ class accessoriesController extends Controller
     {
         $clothing = \App\Product::findOrFail($id);
         $clothing->delete();
-        
-        return redirect('admin/accessories');
+
+        return redirect('admin/jewerlies');
     }
 }

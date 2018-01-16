@@ -107,6 +107,16 @@ class pagesController extends Controller
                     ->with('colors', $colors)
                     ->with('type', $type);
 
+            case ('allJewerlies'):
+                $type = 'jewerly';
+                $products = \App\Product::where('type', '=', 'jewerly')->paginate(9);
+                $categories = \App\Category::where('type', '=', 'jewerly')->get();
+
+                return view('products')
+                    ->with('products', $products)
+                    ->with('categories', $categories)
+                    ->with('type', $type);
+
                 break;
 
             case ('clothing'):
@@ -169,7 +179,31 @@ class pagesController extends Controller
                 }
 
                 break;
+            case('jewerly'):
+                $type = 'jewerly';
+                $categories = \App\Category::where('type', '=', 'Jewerly')->get();
 
+                $accessories = new \App\Product;
+
+                if($request->categories != null){
+                    $full = $accessories::filterClothes(['category_id', '=', $request->categories], $full);
+                }
+                if ($request->minPrice != '0') {
+                    $full = $accessories::filterClothes(['price', '>=', (int)$request->minPrice], $full);
+                }
+                if ($request->maxPrice != '500') {
+                    $full = $accessories::filterClothes(['price', '<=', (int)$request->maxPrice], $full);
+                }
+
+                if ($full != null) {
+                    $products = \App\Product::select('*')
+                        ->where($full)
+                        ->paginate(9);
+                } else {
+                    $products = \App\Product::where('type', '=', 'Jewerly');
+                }
+
+                break;
             default:
                 return back();
         }
@@ -261,5 +295,15 @@ class pagesController extends Controller
         return view('admin/accessoriesOverview')
             ->with('admin', $admin)
             ->with('accessories', $accessories);
+    }
+
+    public function jewerliesOverview()
+    {
+        $admin = \App\Admin::find(1);
+        $jewerlies = \App\Product::where('type', '=', 'jewerly')->paginate(6);
+
+        return view('admin/jewerliesOverview')
+            ->with('admin', $admin)
+            ->with('jewerlies', $jewerlies);
     }
 }

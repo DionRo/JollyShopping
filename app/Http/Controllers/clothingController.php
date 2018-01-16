@@ -12,6 +12,12 @@ class clothingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('admin.only')->except(['adminDetail']);
+    }
+
     public function index()
     {
         $products = \App\Product::where('type', '=', 'clothing')->paginate(9);
@@ -58,7 +64,7 @@ class clothingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:50|unique:clothes,name',
+            'name' => 'required|max:50|unique:products,name',
             'category' => 'required|max:50',
             'price' => 'required',
             'color' => 'required|string',

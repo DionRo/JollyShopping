@@ -12,6 +12,11 @@ class userController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('admin.only');
+    }
+
     public function index()
     {
         $admin = \App\Admin::find(1);

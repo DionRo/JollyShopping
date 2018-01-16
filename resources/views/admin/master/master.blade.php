@@ -27,8 +27,10 @@
                 <li class="nav-home"><a href="/admin">Home</a></li>
                 <li><a href="/admin/clothing">Overzicht kleding</a></li>
                 <li><a href="/admin/accessories">Overzicht accessoires</a></li>
+                <li><a href="/admin/jewerlies">Overzicht sieraden</a></li>
                 <li><a href="{{action('clothingController@create')}}">Kleding toevoegen</a></li>
                 <li><a href="{{action('accessoriesController@create')}}">Accessoire toevoegen</a></li>
+                <li><a href="{{action('jewerlyController@create')}}">Sieraad toevoegen</a></li>
                 <li><a href="/admin/users">Overzicht gebruikers</a></li>
             </ul>
         </div>

@@ -20,10 +20,13 @@ route::get('/admin/clothing', 'pagesController@clothingOverview');
 route::get('/admin/garment/{id}', 'clothingController@adminDetail');
 route::get('/admin/accessory/{id}', 'accessoriesController@adminDetail');
 route::get('/admin/accessories', 'pagesController@accessoriesOverview');
+route::get('/admin/jewerlies/{id}', 'jewerlyController@adminDetail');
+route::get('/admin/jewerlies', 'pagesController@jewerliesOverview');
 route::post('/sendmail', 'pagesController@sendEmail'); 
 
 route::resource('/', 'pagesController');
 route::resource('/clothing', 'clothingController');
 route::resource('/accessories', 'accessoriesController');
+route::resource('/jewerly', 'jewerlyController');
 route::resource('/admin/users', 'userController');
 Auth::routes();
