@@ -246,16 +246,21 @@ class pagesController extends Controller
 
         $totalViewsClothes = \App\Product::where('type', '=', 'clothing')->sum('views');
         $totalViewsAccessories = \App\Product::where('type', '=', 'accessory')->sum('views');
-        $totalViews = $totalViewsClothes + $totalViewsAccessories;
+        $totalViewsJewerlies = \App\Product::where('type', '=', 'jewerly')->sum('views');
+        $totalViews = $totalViewsClothes + $totalViewsAccessories + $totalViewsJewerlies;
 
         $totalFavoredClothes = \App\Product::where('type', '=', 'clothing')->sum('favored');
         $totalFavoredAccessories = \App\Product::where('type', '=', 'accessory')->sum('favored');
-        $totalFavored = $totalFavoredClothes + $totalFavoredAccessories;
+        $totalFavoredJewerlies = \App\Product::where('type', '=', 'jewerly')->sum('favored');
+        $totalFavored = $totalFavoredClothes + $totalFavoredAccessories + $totalFavoredJewerlies;
 
         $clothingViews = \App\Product::where('type', '=', 'clothing')->orderByDesc('views')->get();
         $clothingFavored = \App\Product::where('type', '=', 'clothing')->orderByDesc('favored')->get();
         $accessoriesViews = \App\Product::where('type', '=', 'accessory')->orderByDesc('views')->get();
         $accessoriesFavored = \App\Product::where('type', '=', 'accessory')->orderByDesc('favored')->get();
+        $jewerliesViews = \App\Product::where('type', '=', 'jewerly')->orderByDesc('views')->get();
+        $jewerliesFavored = \App\Product::where('type', '=', 'jewerly')->orderByDesc('favored')->get();
+
 
         return view('admin/home')
             ->with('admin', $admin)
@@ -267,7 +272,9 @@ class pagesController extends Controller
             ->with('clothingViews', $clothingViews)
             ->with('clothingFavored', $clothingFavored)
             ->with('accessoriesViews', $accessoriesViews)
-            ->with('accessoriesFavored', $accessoriesFavored);
+            ->with('accessoriesFavored', $accessoriesFavored)
+            ->with('jewerliesViews', $jewerliesViews)
+            ->with('jewerliesFavored', $jewerliesFavored);
     }
 
     /**

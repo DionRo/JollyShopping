@@ -91,6 +91,39 @@
                 @endfor
             </ul>
         </div>
+        <h4>Top Sieraden</h4>
+        <div class="overviews-container">
+            <ul class="flex">
+                @for($i = 0; $i < count($jewerliesViews); $i++)
+                    @if($i < 2)
+                        <li class="flex">
+                            <div class="overview-item align-center">
+                                <img src="{{$jewerliesViews[$i]->picture}}" alt="">
+                                <h5>{{$jewerliesViews[$i]->name}}</h5>
+                            </div>
+                            <div class="overview-item-info align-center flex flex-center flex-column">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                <p>{{$jewerliesViews[$i]->views}}</p>
+                            </div>
+                        </li>
+                    @endif
+                @endfor
+                @for($i = 0; $i < count($jewerliesFavored); $i++)
+                    @if($i < 2)
+                        <li class="flex">
+                            <div class="overview-item align-center">
+                                <img src="{{$jewerliesFavored[$i]->picture}}" alt="">
+                                <h5>{{$jewerliesFavored[$i]->name}}</h5>
+                            </div>
+                            <div class="overview-item-info align-center flex flex-center flex-column">
+                                <i class="fa fa-heart" aria-hidden="true"></i>
+                                <p>{{$jewerliesFavored[$i]->favored}}</p>
+                            </div>
+                        </li>
+                    @endif
+                @endfor
+            </ul>
+        </div>
     </div>
 
 @endsection

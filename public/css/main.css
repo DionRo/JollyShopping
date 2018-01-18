@@ -611,7 +611,7 @@ html, body, .admin, .admin .main-content{
 .clothes-overview p, .accessories-overview p, .users-overview p{
     font-size: 1.2em;
 }
-.users-overview li{
+.users-overview .li-resize{
     padding: 15px;
 }
 /*ADMIN ADD PRODUCTS*/

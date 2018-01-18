@@ -29,4 +29,5 @@ route::resource('/clothing', 'clothingController');
 route::resource('/accessories', 'accessoriesController');
 route::resource('/jewerly', 'jewerlyController');
 route::resource('/admin/users', 'userController');
+route::resource('/admin/categories', 'categoryController');
 Auth::routes();

@@ -6,7 +6,7 @@
         <h4>Overzicht Gebuikers</h4>
         <ul class="overview">
             @foreach($users as $user)
-                <li>
+                <li class="li-resize">
                     <h5>{{$user->rank}}</h5>
                     <p>Voornaam: {{$user->firstname}}</p>
                     <p>Achternaam: {{$user->lastname}}</p>
