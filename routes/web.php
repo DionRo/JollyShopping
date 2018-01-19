@@ -22,6 +22,7 @@ route::get('/admin/accessory/{id}', 'accessoriesController@adminDetail');
 route::get('/admin/accessories', 'pagesController@accessoriesOverview');
 route::get('/admin/jewerlies/{id}', 'jewerlyController@adminDetail');
 route::get('/admin/jewerlies', 'pagesController@jewerliesOverview');
+route::get('/sendNewsletter/{id}', 'newsletterController@sendNewsletter');
 route::post('/sendmail', 'pagesController@sendEmail'); 
 
 route::resource('/', 'pagesController');
@@ -30,4 +31,5 @@ route::resource('/accessories', 'accessoriesController');
 route::resource('/jewerly', 'jewerlyController');
 route::resource('/admin/users', 'userController');
 route::resource('/admin/categories', 'categoryController');
+route::resource('/admin/newsletters', 'newsletterController');
 Auth::routes();

@@ -34,8 +34,6 @@ class categoryController extends Controller
      */
     public function create()
     {
-        $admin = \App\Admin::find(1);
-
         return view('admin/addCategory');
     }
 
@@ -91,16 +89,7 @@ class categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:50',
-            'category' => 'required|max:50',
-            'price' => 'required',
-            'color' => 'required|string',
-            'gender' => 'required|string',
-            'stock' => 'required|integer',
-            'description' => 'required',
-        ]);
-
+        //
     }
 
     /**
@@ -111,9 +100,9 @@ class categoryController extends Controller
      */
     public function destroy($id)
     {
-//        $clothing = \App\Product::findOrFail($id);
-//        $clothing->delete();
-//
+        $clothing = \App\Category::findOrFail($id);
+        $clothing->delete();
+
 //        $product = \App\Size::where('clothing_id', $id);
 //        $product->delete();
 //
