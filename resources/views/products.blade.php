@@ -181,9 +181,9 @@
                             @elseif($product->discount > 0)
                                 <p class="onsale-tag">ON SALE</p>
                             @endif
-                            <form class="view-product" method="get" action="@if($product->type = "accessory") {{action('clothingController@show', $product->id)}}
-                                                                            @elseif($product->type = "clothing") {{action('accessoriesController@show', $product->id)}}
-                                                                            @else  {{action('jewerlyController@show', $product->id)}} @endif">
+                            <form class="view-product" method="get" action="@if($product->type === 'clothing'){{action('clothingController@show', $product->id)}}
+                                                                            @elseif($product->type === 'accessory') {{action('accessoriesController@show', $product->id)}}
+                                                                            @else {{action('jewerlyController@show', $product->id)}} @endif">
                                 {{csrf_field()}}
                                 <input class="view" type="image" src="img/view.png">
                                 <input type="submit" value="">
