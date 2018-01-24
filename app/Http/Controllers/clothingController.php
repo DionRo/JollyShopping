@@ -15,7 +15,7 @@ class clothingController extends Controller
 
     public function __construct()
     {
-        $this->middleware('admin.only')->except(['adminDetail']);
+        $this->middleware('admin.only')->except(['adminDetail' , 'show']);
     }
 
     public function index()
