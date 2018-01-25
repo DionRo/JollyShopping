@@ -49,7 +49,7 @@ class newsletterController extends Controller
             'pdf' => 'required'
         ]);
 
-        $targetfolder = "newsletters/";
+        $targetfolder = storage_path("newsletters/");
 
         $targetfolder = $targetfolder . basename( $_FILES['pdf']['name']) ;
 
@@ -80,28 +80,10 @@ class newsletterController extends Controller
         $users = \App\User::where('isSubscribed', '=' , '1')->get();
         $newsletter = \App\Newsletter::find($id);
 
+        $order = 'Newsletter';
+        $path = storage_path($newsletter->path);
 
-//            $email = new PHPMailer();
-//
-//            $email->From = 'info@jollyshopping.nl';
-//            $email->FromName = 'JollyShopping';
-//            $email->Subject = 'Nieuwsbrief' . $newsletter->title;
-//            $email->Body      = $newsletter->description;
-//            $email->AddAddress('dionrodie@hotmail.com');
-//            $email->AddAttachment($newsletter->path, $newsletter->title);
-
-       foreach ($users as $user)
-       {
-           $to = $user->email;
-           $subject = $newsletter->title;
-           $txt = $newsletter->descrtiption;
-
-           $from = "info@jollyshopping.nl";
-           $headers = "FROM: ". $from ;
-
-           mail($to,$subject,$txt,$headers);
-
-       }
+        Mail::to($users)->send(new NewsletterMail($order, $path));
 
     }
 
