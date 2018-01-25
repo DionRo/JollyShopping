@@ -74,6 +74,7 @@ class RegisterController extends Controller
             'zipcode' =>$data['zipcode'],
             'country' =>$data['country'],
             'gender' =>$data['gender'],
+            'securityToken' => md5($data['email']),
             'password' => bcrypt($data['password']),
         ]);
 

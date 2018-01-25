@@ -24,7 +24,7 @@ route::get('/admin/jewerlies/{id}', 'jewerlyController@adminDetail');
 route::get('/admin/jewerlies', 'pagesController@jewerliesOverview');
 route::get('/sendNewsletter/{id}', 'newsletterController@sendNewsletter');
 route::post('/sendmail', 'pagesController@sendEmail');
-route::get('/unsubscribe/{email}/{id}', 'userController@unsubscribe');
+route::get('/unsubscribe/{email}/{securityToken}', 'userController@unsubscribe');
 
 route::resource('/', 'pagesController');
 route::resource('/clothing', 'clothingController');
