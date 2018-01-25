@@ -77,6 +77,15 @@ class userController extends Controller
             ->with('genders', $genders);
     }
 
+    public function unsubscribe($email, $id)
+    {
+        $user = \App\User::where('email', '=' , $email)
+            ->where('id', '=', $id)
+            ->first();
+
+        $user->isSubscribed = 0;
+        $user->save();
+    }
     /**
      * Update the specified resource in storage.
      *

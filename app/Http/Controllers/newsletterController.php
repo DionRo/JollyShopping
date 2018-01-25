@@ -82,7 +82,7 @@ class newsletterController extends Controller
 
         foreach($users as $user)
         {
-            Mail::to($user->email)->send(new NewsletterMail($order, $path, $newsletter));
+            Mail::to($user->email)->send(new NewsletterMail($order, $path, $newsletter , $user));
         }
         return redirect('/admin/newsletters');
 
