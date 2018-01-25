@@ -85,6 +85,8 @@ class userController extends Controller
 
         $user->isSubscribed = 0;
         $user->save();
+
+        return redirect('/');
     }
     /**
      * Update the specified resource in storage.
