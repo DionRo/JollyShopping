@@ -85,6 +85,8 @@ class newsletterController extends Controller
 
             Mail::to($user->email)->send(new NewsletterMail($order, $path));
         }
+        
+        return redirect('/admin/newsletters');
 
     }
 
