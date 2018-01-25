@@ -13,15 +13,18 @@ class NewsletterMail extends Mailable
 
     public $order;
     public $attachment;
+    public $newsletter;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($order_info, $path)
+    public function __construct($order_info, $path, $newsletter)
     {
         $this->order = $order_info;
         $this->attachment = $path;
+        $this->newsletter = $newsletter;
     }
 
     /**
@@ -33,6 +36,7 @@ class NewsletterMail extends Mailable
     {
         return $this->from("mailkabouter@jollyshopping.nl")
             ->attach($this->attachment)
-            ->view('newsletter/newsletter');
+            ->view('newsletter/newsletter')
+            ->with('newsletter', $this->newsletter);
     }
 }
