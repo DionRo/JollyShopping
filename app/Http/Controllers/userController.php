@@ -86,6 +86,25 @@ class userController extends Controller
         $user->isSubscribed = 0;
         $user->save();
 
+        $email = "mailkabouter@jollyshopping.nl";
+        $to = $user->email;
+        $subject = "Afmelden van de niewsbrief";
+        $txt =
+            "Beste $user->firstname $user->middlename $user->lastname,
+        U heeft zojuist afgemeld op de nieuwsbrief van jollyshopping.nl
+        indien u zich opnieuw wilt aanmelden voor de niews brief
+        kan dat via de website. 
+        
+        Met Vriendelijke groet,
+        Team JollyShopping";
+
+        $headers = "FROM: ". $email;
+
+        mail($to,$subject,$txt,$headers);
+
+        return redirect('/');
+
+
         return redirect('/');
 
     }
