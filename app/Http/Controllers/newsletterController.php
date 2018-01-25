@@ -48,20 +48,17 @@ class newsletterController extends Controller
             'description' => 'required',
             'pdf' => 'required'
         ]);
-
-        $targetfolder = storage_path("newsletters/");
-
-        $targetfolder = $targetfolder . basename( $_FILES['pdf']['name']) ;
+        
+        $targetfolder = storage_path("newsletters/") . basename( $_FILES['pdf']['name']) ;
 
         if(move_uploaded_file($_FILES['pdf']['tmp_name'], $targetfolder))
-
         {
 
             $newsletter =  new \App\Newsletter();
 
             $newsletter->title = $request->name;
             $newsletter->description = $request->description;
-            $newsletter->path = $targetfolder;
+            $newsletter->path = "newsletters/". basename( $_FILES['pdf']['name']) ;;
 
             $newsletter->save();
 
