@@ -31,7 +31,7 @@ class NewsletterMail extends Mailable
      */
     public function build()
     {
-        return $this->from("recovery@jollyshopping.nl")
+        return $this->from("mailkabouter@jollyshopping.nl")
             ->attach($this->attachment)
             ->view('newsletter/newsletter');
     }

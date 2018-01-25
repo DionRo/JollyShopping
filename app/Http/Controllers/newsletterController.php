@@ -80,7 +80,11 @@ class newsletterController extends Controller
         $order = 'Newsletter';
         $path = storage_path($newsletter->path);
 
-        Mail::to($users)->send(new NewsletterMail($order, $path));
+        foreach($users as $user)
+        {
+
+            Mail::to($user->email)->send(new NewsletterMail($order, $path));
+        }
 
     }
 
