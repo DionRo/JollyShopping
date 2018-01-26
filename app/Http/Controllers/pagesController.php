@@ -26,10 +26,12 @@ class pagesController extends Controller
     {
         $clothing = \App\Product::where('type', '=', 'clothing')->orderByDesc('created_at')->get();
         $accessories = \App\Product::where('type', '=', 'accessory')->orderByDesc('created_at')->get();
+        $jewerlies = \App\Product::where('type', '=', 'jewerly')->orderByDesc('created_at')->get();
 
         return view('home')
             ->with('clothing', $clothing)
-            ->with('accessories', $accessories);
+            ->with('accessories', $accessories)
+            ->with('jewerlies' , $jewerlies);
     }
 
     public function sendEmail()
