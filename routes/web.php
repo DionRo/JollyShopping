@@ -23,8 +23,9 @@ route::get('/admin/accessories', 'pagesController@accessoriesOverview');
 route::get('/admin/jewerlies/{id}', 'jewerlyController@adminDetail');
 route::get('/admin/jewerlies', 'pagesController@jewerliesOverview');
 route::get('/sendNewsletter/{id}', 'newsletterController@sendNewsletter');
-route::post('/sendmail', 'pagesController@sendEmail');
 route::get('/unsubscribe/{email}/{securityToken}', 'userController@unsubscribe');
+route::post('/subscribe', 'userController@subscribe');
+route::post('/sendmail', 'pagesController@sendEmail');
 
 route::resource('/', 'pagesController');
 route::resource('/clothing', 'clothingController');

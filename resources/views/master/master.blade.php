@@ -8,7 +8,7 @@
     <script src="../js/jquery.js"></script>
     <script src="https://use.fontawesome.com/3571e1e4e4.js"></script>
     <meta name="google-site-verification" content="nZjliQF8W3kaZe_OFICzIDElc3G7xaXt50zoiQBBrLM" />
-    
+
     <style>
         @if(Auth::check() == true && Auth::user()->userLevel > 0)
         .header-top nav ul {
@@ -101,7 +101,7 @@
 
     </style>
 
-    </head>
+</head>
 <body>
 <header class="@yield('header-class')">
     <div class="header-top">
@@ -174,6 +174,17 @@
 
 <footer>
     <div class="container flex flex-column align-center flex-center">
+        <h2>Nieuwsbrief</h2>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+        <form method="post" action="{{ action('userController@subscribe')}}">
+            {{csrf_field()}}
+            <input type="email" name="email">
+            <input type="submit" value="Laat mij nieuwsbrief ontvangen">
+        </form>
         <ul class="flex flex-between">
             <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
             <li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

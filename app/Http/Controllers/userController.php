@@ -14,7 +14,7 @@ class userController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin.only');
+        $this->middleware('admin.only')->except(['subscribe', 'unsubscribe']);
     }
 
     public function index()
@@ -76,6 +76,26 @@ class userController extends Controller
             ->with('user', $user)
             ->with('genders', $genders);
     }
+    public function subscribe(Request $request)
+    {
+        $email = $request->email;
+        $user = \App\User::where('email' , '=' , $email)->first();
+
+        if(isset($user))
+        {
+            $user->isSubscribed = 1;
+            $user->save();
+
+            return redirect('/')->with('status', 'U bent opnieuw aangemeld voor de nieuwsbrief 
+            , afmelden gaat wederom via de email.');
+        }
+        else
+        {
+            return redirect('/')->with('status', 'Deze email is niet bekend in ons systeem,
+            registeer uzelf eerst, u bent dan automatisch aangemeld voor de niewsbrief.');
+        }
+    }
+
 
     public function unsubscribe($email, $securityToken)
     {
@@ -90,7 +110,7 @@ class userController extends Controller
         $to = $user->email;
         $subject = "Afmelden van de niewsbrief";
         $txt =
-            "Beste $user->firstname $user->middlename $user->lastname,
+            "Beste $user->firstname $user->lastname,
         U heeft zojuist afgemeld op de nieuwsbrief van jollyshopping.nl
         indien u zich opnieuw wilt aanmelden voor de niews brief
         kan dat via de website. 
@@ -101,9 +121,6 @@ class userController extends Controller
         $headers = "FROM: ". $email;
 
         mail($to,$subject,$txt,$headers);
-
-        return redirect('/');
-
 
         return redirect('/');
 
@@ -160,7 +177,7 @@ class userController extends Controller
     {
         $user = \App\User::findOrFail($id);
         $user->delete();
-        
+
         return redirect('admin');
     }
 }
