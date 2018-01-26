@@ -299,7 +299,7 @@ h1 span{
     width: 85%;
 }
 .catalogus{
-	min-height: 730px;
+    min-height: 730px;
 }
 .filter{
     width: 15%;
@@ -340,8 +340,8 @@ h1 span{
     padding: 10px;
 }
 .products li h3{
-	font-size: 1.5em;
-	padding: 0 0 10px 0;
+    font-size: 1.5em;
+    padding: 0 0 10px 0;
 }
 
 .pagination{
@@ -716,6 +716,32 @@ i{
     font-size: 1em;
     color: #EB807D;
 }
+.subscribeForm .email
+{
+    border-radius: 20px;
+    padding: 10px;
+    width: 250px;
+    margin-top: 10px;
+    border: none;
+}
+
+.subscribeForm .email:focus
+{
+    background: rgb(87, 197, 160);
+}
+.button-downing
+{
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.alert p
+{
+    font-size: 15px;
+    color: white;
+}
+
 /*MEDIA QUERYS*/
 @media
 only screen and (-webkit-min-device-pixel-ratio: 1.5),
@@ -777,9 +803,9 @@ only screen and (min-device-pixel-ratio: 1.5){
     .products .new-product{
         margin: 10px 9px;
     }
-	.products li h3{
-		text-align: right;
-	}
+    .products li h3{
+        text-align: right;
+    }
     .detail-content .product-info h2, .detail-content .product-info p, .detail-content .product-info h3, .detail-content .product-info sizes{
         width: 350px;
     }
@@ -846,9 +872,9 @@ only screen and (min-device-pixel-ratio: 1.5){
     .new-product{
         width: 200px;
     }
-	.new-product img{
-		padding: 0;
-	}
+    .new-product img{
+        padding: 0;
+    }
     .new-product h3{
         font-size: 1.5em;
         text-align: right;
@@ -872,12 +898,12 @@ only screen and (min-device-pixel-ratio: 1.5){
     }
     .products .new-product h3{
         font-size: 1.2em;
-		text-align: right;
-		padding-right: 5px;
+        text-align: right;
+        padding-right: 5px;
     }
-	.price-tag{
-		left: 0;
-	}
+    .price-tag{
+        left: 0;
+    }
     .outofstock-tag, .onsale-tag{
         font-size: 1em;
         width: 40px;

@@ -174,16 +174,15 @@
 
 <footer>
     <div class="container flex flex-column align-center flex-center">
-        <h2>Nieuwsbrief</h2>
         @if (session('status'))
             <div class="alert alert-success">
-                {{ session('status') }}
+                <p>{{ session('status') }}</p>
             </div>
         @endif
-        <form method="post" action="{{ action('userController@subscribe')}}">
+        <form class="subscribeForm" method="post" action="{{ action('userController@subscribe')}}">
             {{csrf_field()}}
-            <input type="email" name="email">
-            <input type="submit" value="Laat mij nieuwsbrief ontvangen">
+            <input class="email" type="email" name="email" placeholder="Vul hier uw email in"><br>
+            <input class="button-downing" type="submit" value="Meld aan voor de nieuwsbrief">
         </form>
         <ul class="flex flex-between">
             <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
