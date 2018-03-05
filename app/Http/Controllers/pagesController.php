@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Null_;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 class pagesController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('admin.only')->except(['index' , 'products' , 'about' , 'contact', 'filterProducts','sendEmail']);
+        $this->middleware('admin.only')->except(['index' , 'products' , 'about' , 'contact', 'filterProducts','sendEmail','getAddToCart', 'getCart', 'addUpProduct', 'removeSingle', 'removeProduct']);
     }
 
     /**
@@ -21,6 +22,67 @@ class pagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function getAddToCart(Request $request, $id)
+    {
+        $product = \App\Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect('products');
+
+    }
+    public function addUpProduct (Request $request, $id)
+    {
+
+        $product = \App\Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect('shopping-cart');
+    }
+
+    public function removeSingle(Request $request, $id)
+    {
+        $product = \App\Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        $cart->remove($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect('shopping-cart');
+    }
+    public function removeProduct(Request $request, $id)
+    {
+        $product = \App\Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        $cart->removeTotal($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect('shopping-cart');
+    }
+    public function getCart()
+    {
+        if(!Session::has('cart'))
+        {
+            return view('shoppingcart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+
+        return view('shoppingcart')
+            ->with('products' , $cart->items)
+            ->with('totalPrice', $cart->totalPrice );
+    }
 
     public function index()
     {

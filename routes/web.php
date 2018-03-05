@@ -27,6 +27,12 @@ route::get('/unsubscribe/{email}/{securityToken}', 'userController@unsubscribe')
 route::post('/subscribe', 'userController@subscribe');
 route::post('/sendmail', 'pagesController@sendEmail');
 
+route::get('/add-to-cart/{id}' , 'pagesController@getAddToCart');
+route::get('/shopping-cart', 'pagesController@getCart')->name('getCart');
+route::get('/shopping-cart/addUp/{id}' , 'pagesController@addUpProduct');
+route::get('/shopping-cart/removeSingle/{id}' , 'pagesController@removeSingle');
+route::get('/shopping-cart/removeProduct/{id}' , 'pagesController@removeProduct');
+
 route::resource('/', 'pagesController');
 route::resource('/clothing', 'clothingController');
 route::resource('/accessories', 'accessoriesController');

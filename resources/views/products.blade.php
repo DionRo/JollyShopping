@@ -1,7 +1,7 @@
 @extends('master/master')
 
 @section('content')
-</header>
+
 <div class="main-content catalogus">
     <div class="container">
         <div class="flex">
@@ -175,6 +175,7 @@
                         <li class="new-product align-center">
                             <img src="{{$product->picture}}" alt="product">
                             <h3>{{$product->name}}</h3>
+                            <a href="{{action('pagesController@getAddToCart', $product->id)}}" role="button">Voeg toe aan winkelwagen</a>
                             <p class="price-tag">&#8364;{{$product->price}}</p>
                             @if($product->stock == 0)
                                 <p class="outofstock-tag">OUT OF STOCK</p>

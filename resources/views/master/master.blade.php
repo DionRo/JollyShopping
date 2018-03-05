@@ -6,101 +6,8 @@
     <link rel="stylesheet" href="../css/main.css">
     <meta name="viewport" content="width=device-width"/>
     <script src="../js/jquery.js"></script>
-    <script src="https://use.fontawesome.com/3571e1e4e4.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <meta name="google-site-verification" content="nZjliQF8W3kaZe_OFICzIDElc3G7xaXt50zoiQBBrLM" />
-
-    <style>
-        @if(Auth::check() == true && Auth::user()->userLevel > 0)
-        .header-top nav ul {
-            width: 650px;
-            height: 120px;
-            position: relative;
-        }
-
-        .header-top nav li {
-            height: 120px;
-            width: 120px;
-            border-radius: 100%;
-            position: absolute;
-        }
-
-        .header-top .red {
-            background: rgba(200, 0, 0, 0.7);
-            left: 0;
-        }
-
-        .header-top .yellow {
-            background: rgba(255, 180, 0, 0.7);
-            left: 105px;
-        }
-
-        .header-top .pink {
-            background: rgba(216, 62, 123, 0.7);
-            left: 210px;
-        }
-
-        .header-top .orange {
-            background: rgba(255, 116, 0, 0.7);
-            right: 215px;
-        }
-
-        .header-top .blue {
-            background: rgba(11, 80, 135, 0.7);
-            right: 110px;
-        }
-
-        .header-top .gray {
-            background: rgba(221, 221, 221, 1);
-            right: 0px;
-        }
-
-        @else
-        .header-top nav ul {
-            width: 540px;
-            height: 120px;
-            position: relative;
-        }
-
-        .header-top nav li {
-            height: 120px;
-            width: 120px;
-            border-radius: 100%;
-            position: absolute;
-        }
-
-        .header-top .red {
-            background: rgba(200, 0, 0, 0.7);
-            left: 0;
-        }
-
-        .header-top .yellow {
-            background: rgba(255, 180, 0, 0.7);
-            left: 105px;
-        }
-
-        .header-top .pink {
-            background: rgba(216, 62, 123, 0.7);
-            left: 210px;
-        }
-
-        .header-top .orange {
-            background: rgba(255, 116, 0, 0.7);
-            right: 105px;
-        }
-
-        .header-top .blue {
-            background: rgba(11, 80, 135, 0.7);
-            right: 0px;
-        }
-
-        .header-top .gray {
-            background: rgba(221, 221, 221, 0.7);
-            right: 0px;
-        }
-        @endif
-
-    </style>
-
 </head>
 <body>
 <header class="@yield('header-class')">
@@ -115,11 +22,15 @@
                     <li class="flex align-center flex-center pink"><a href="/about">About</a></li>
                     <li class="flex align-center flex-center orange"><a href="/contact">Contact</a></li>
 
-
                     @if(Auth::Check() == True)
                         @if(Auth::user()->userLevel > 0 )
-
                             <li class="flex align-center flex-center gray"><a href="/admin">Dashboard</a></li>
+                        @else
+                            <li class="flex align-center flex-center gray">
+                                <a href="{{route('getCart')}}">
+                                    <i class="fa fa-shopping-cart" style="font-size: 3em; color: white;">{{Session::has('cart') ? Session::get('cart')->totalQty : ''}}</i>
+                                </a>
+                            </li>
                         @endif
                         <li class="flex align-center flex-center blue" style="display: flex">
                             <a class="logout" href="{{ route('logout') }}"
