@@ -5,7 +5,7 @@
  <div class="main-content">
      <div class="container">
          <h2 style="font-size: 40px;">Uw winkelwagen</h2>
-        <div>
+        <div class="catalogus">
             <ul>
                 @foreach($products as $product)
                  <div style="display: flex; padding-top: 10px;" >
@@ -29,10 +29,10 @@
                  </div>
                 @endforeach
             </ul>
-        </div>
-        <div class="" style="float: right;">
-            <strong>Total: {{$totalPrice}}</strong>
-            <a href="">Checkout</a>
+            <div class="" style="float: right;">
+                <strong>Total: {{$totalPrice}}</strong>
+                <a href="">Checkout</a>
+            </div>
         </div>
     @else
         <div class="">
