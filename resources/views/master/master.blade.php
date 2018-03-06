@@ -28,7 +28,7 @@
                         @else
                             <li class="flex align-center flex-center gray">
                                 <a href="{{route('getCart')}}">
-                                    <i class="fa fa-shopping-cart" style="font-size: 3em; color: white;">{{Session::has('cart') ? Session::get('cart')->totalQty : ''}}</i>
+                                    <i  style="font-size: 3em; color: white;">{{Session::has('cart') ? Session::get('cart')->totalQty : ''}}</i>
                                 </a>
                             </li>
                         @endif

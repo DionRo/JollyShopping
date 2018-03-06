@@ -61,13 +61,13 @@ class pagesController extends Controller
     }
     public function removeProduct(Request $request, $id)
     {
-        $product = \App\Product::find($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = Session::has('cart') ? Session::get('cart') : null;
 
-        $cart->removeTotal($product, $product->id);
+        $cartClean = new Cart($cart);
+        $cartClean->removeTotal($id);
 
-        $request->session()->put('cart', $cart);
+        $request->session()->put('cart', $cartClean);
+
         return redirect('shopping-cart');
     }
     public function getCart()
