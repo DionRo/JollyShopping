@@ -39,8 +39,11 @@
                 @endforeach
             </ul>
             <div class="" style="float: right;">
-                <strong>Total: {{$totalPrice}}</strong>
-                <a href="">Checkout</a>
+                <strong>Total: {{$totalPrice}}</strong><br>
+                <form action="{{action('pagesController@checkOut')}}" method="post">
+                    {{csrf_field()}}
+                    <input type="submit">
+                </form>
             </div>
         </div>
     @else

@@ -71,6 +71,11 @@ class Cart
         $storedItem['qty'];
         $this->totalQty -= $storedItem['qty'];
         $this->totalPrice -= $storedItem['price'];
+
+        if ($this->totalPrice < 0.001)
+        {
+            $this->totalPrice = 0;
+        }
         unset($this->items[$id]);
 
     }

@@ -176,7 +176,7 @@
                             <img src="{{$product->picture}}" alt="product">
                             <h3>{{$product->name}}</h3>
                             @if(Auth::Check() == True)
-                            <a href="{{action('pagesController@getAddToCart', $product->id)}}" role="button">Voeg toe aan winkelwagen</a>
+                            <a  id="{{$product->id}}" href="{{action('pagesController@getAddToCart', $product->id)}}"  role="button">Voeg toe aan winkelwagen</a>
                             @endif
                             <p class="price-tag">&#8364;{{$product->price}}</p>
                             @if($product->stock == 0)
@@ -186,7 +186,8 @@
                             @endif
                             <form class="view-product" method="get" action="@if($product->type === 'clothing'){{action('clothingController@show', $product->id)}}
                                                                             @elseif($product->type === 'accessory') {{action('accessoriesController@show', $product->id)}}
-                                                                            @else {{action('jewerlyController@show', $product->id)}} @endif">
+                                                                            @else {{action('jewerlyController@show', $product->id)}}
+                                                                            @endif">
                                 {{csrf_field()}}
                                 <input class="view" type="image" src="img/view.png">
                                 <input type="submit" value="">
@@ -199,4 +200,5 @@
         </div>
     </div>
 </div>
+
 @endsection

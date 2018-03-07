@@ -1,7 +1,7 @@
 @extends('master/master')
 
 @section('content')
-</header>
+
 <div class="main-content detail-content">
     <div class="container flex ">
         <img class="product-img" src="{{$product->picture}}" alt="product">
@@ -28,5 +28,8 @@
             <p>{{$product->description}}</p>
         </div>
     </div>
+    @if(Auth::Check() == True)
+        <a class="addCartDetail" href="{{action('pagesController@getAddToCartDetail', $product->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
+    @endif
 </div>
 @endsection

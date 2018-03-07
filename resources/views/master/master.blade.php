@@ -90,11 +90,13 @@
                 <p>{{ session('status') }}</p>
             </div>
         @endif
-        <form class="subscribeForm" method="post" action="{{ action('userController@subscribe')}}">
-            {{csrf_field()}}
-            <input class="email" type="email" name="email" placeholder="Vul hier uw email in"><br>
-            <input class="button-downing" type="submit" value="Meld aan voor de nieuwsbrief">
-        </form>
+        @if(Auth::check() == true && Auth::user()->isSubscribed == null )
+            <form class="subscribeForm" method="post" action="{{ action('userController@subscribe')}}">
+                {{csrf_field()}}
+                <input class="email" type="email" name="email" placeholder="Vul hier uw email in"><br>
+                <input class="button-downing" type="submit" value="Meld aan voor de nieuwsbrief">
+            </form>
+        @endif
         <ul class="flex flex-between">
             <li><a href=""><i class="fab fa-facebook-f" aria-hidden="true" style="color: #EB807D;"></i></a></li>
             <li><a href=""><i class="fab fa-twitter" aria-hidden="true" style="color: #EB807D;"></i></a></li>

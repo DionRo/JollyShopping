@@ -264,6 +264,14 @@ h1 span{
     padding: 15px 0;
     font-size: 1.5em;
 }
+.addCartDetail{
+
+    background: rgb(87, 197, 160);
+    color: #FFF;
+    width: 50px;
+    padding: 15px 0;
+    font-size: 1.5em;
+}
 
 .onsale-tag, .outofstock-tag{
     position: absolute;

@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Cart;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,11 +31,25 @@ route::get('/unsubscribe/{email}/{securityToken}', 'userController@unsubscribe')
 route::post('/subscribe', 'userController@subscribe');
 route::post('/sendmail', 'pagesController@sendEmail');
 
+// cart routes
 route::get('/add-to-cart/{id}' , 'pagesController@getAddToCart');
+route::get('/add-to-cart-main/{id}' , 'pagesController@getAddToCartMain');
+route::get('/add-to-cart-detail/{id}' , 'pagesController@getAddToCartDetail');
 route::get('/shopping-cart', 'pagesController@getCart')->name('getCart');
 route::get('/shopping-cart/addUp/{id}' , 'pagesController@addUpProduct');
 route::get('/shopping-cart/removeSingle/{id}' , 'pagesController@removeSingle');
 route::get('/shopping-cart/removeProduct/{id}' , 'pagesController@removeProduct');
+route::post('/checkout', 'pagesController@checkOut');
+// wrong route
+Route::get('/sales/{id}', function ($id){;
+    $product = \App\Product::find($id);
+    $oldCart = Session::has('cart') ? Session::get('cart') : null;
+    $cart = new Cart($oldCart);
+
+    $cart->add($product, $product->id);
+    session()->put('cart', $cart);
+
+});
 
 route::resource('/', 'pagesController');
 route::resource('/clothing', 'clothingController');
