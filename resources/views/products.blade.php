@@ -175,7 +175,9 @@
                         <li class="new-product align-center">
                             <img src="{{$product->picture}}" alt="product">
                             <h3>{{$product->name}}</h3>
+                            @if(Auth::Check() == True)
                             <a href="{{action('pagesController@getAddToCart', $product->id)}}" role="button">Voeg toe aan winkelwagen</a>
+                            @endif
                             <p class="price-tag">&#8364;{{$product->price}}</p>
                             @if($product->stock == 0)
                                 <p class="outofstock-tag">OUT OF STOCK</p>

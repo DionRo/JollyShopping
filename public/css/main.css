@@ -253,6 +253,18 @@ h1 span{
     padding: 15px 0;
     font-size: 1.5em;
 }
+
+.addCart{
+    position: absolute;
+    bottom: 0;
+    left: 290px;
+    background: rgb(87, 197, 160);
+    color: #FFF;
+    width: 50px;
+    padding: 15px 0;
+    font-size: 1.5em;
+}
+
 .onsale-tag, .outofstock-tag{
     position: absolute;
     top: 0;
@@ -748,7 +760,7 @@ footer ul a{
     font-size: 3em;
 }
 i{
-    color: #EB807D;
+    color: #EB807D!important;
 }
 .copyright p{
     padding: 10px 0;

@@ -56,6 +56,7 @@ class pagesController extends Controller
 
         $cart->remove($product, $product->id);
 
+
         $request->session()->put('cart', $cart);
         return redirect('shopping-cart');
     }

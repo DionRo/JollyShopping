@@ -96,9 +96,9 @@
             <input class="button-downing" type="submit" value="Meld aan voor de nieuwsbrief">
         </form>
         <ul class="flex flex-between">
-            <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-            <li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-            <li><a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            <li><a href=""><i class="fab fa-facebook-f" aria-hidden="true" style="color: #EB807D;"></i></a></li>
+            <li><a href=""><i class="fab fa-twitter" aria-hidden="true" style="color: #EB807D;"></i></a></li>
+            <li><a href=""><i class="fab fa-linkedin-in" aria-hidden="true" style="color: #EB807D;"></i></a></li>
         </ul>
         <div class="copyright">
             <p>Jolly Shopping &copy; 2017 - <a href="https://crucialdesigns.nl" target="_blank">Crucial Designs</a></p>
