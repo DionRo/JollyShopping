@@ -23,12 +23,12 @@
                     <li class="flex align-center flex-center orange"><a href="/contact">Contact</a></li>
 
                     @if(Auth::Check() == True)
-                        @if(Auth::user()->userLevel > 0 )
+                        @if(Auth::user()->userLevel > 0)
                             <li class="flex align-center flex-center gray"><a href="/admin">Dashboard</a></li>
                         @else
                             <li class="flex align-center flex-center gray">
                                 <a href="{{route('getCart')}}">
-                                    <i  style="font-size: 3em; color: white;">{{Session::has('cart') ? Session::get('cart')->totalQty : ''}}</i>
+                                    <i  class="fas fa-shopping-cart" style="font-size: 3em; color: white;"></i>
                                 </a>
                             </li>
                         @endif

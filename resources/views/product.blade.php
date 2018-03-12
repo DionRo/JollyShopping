@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="main-content detail-content">
-    <div class="container flex ">
+    <div class="container  flex ">
         <img class="product-img" src="{{$product->picture}}" alt="product">
         <div class="product-info">
             <h2>{{$product->name}}</h2>
@@ -26,10 +26,13 @@
             @endif
             <h3 class="description">Beschrijving</h3>
             <p>{{$product->description}}</p>
+            <br>
         </div>
     </div>
-    @if(Auth::Check() == True)
-        <a class="addCartDetail" href="{{action('pagesController@getAddToCartDetail', $product->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
-    @endif
+</div>
+<div class="container" style="text-align: center; height: 50px;padding-top: 20px;">
+        @if(Auth::Check() == True)
+            <a  class="addCartDetail" href="{{action('pagesController@getAddToCartDetail', $product->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
+        @endif
 </div>
 @endsection

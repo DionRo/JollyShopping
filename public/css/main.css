@@ -246,7 +246,6 @@ h1 span{
 .price-tag{
     position: absolute;
     bottom: 0;
-    left: 10px;
     background: rgb(87, 197, 160);
     color: #FFF;
     width: 50px;
@@ -258,20 +257,31 @@ h1 span{
     position: absolute;
     bottom: 0;
     left: 290px;
-    background: rgb(87, 197, 160);
+    background: rgb(255, 89, 85);
     color: #FFF;
     width: 50px;
     padding: 15px 0;
     font-size: 1.5em;
 }
-.addCartDetail{
+.addCartMain{
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+    background: rgb(255, 89, 85);
+    color: #FFF;
+    width: 50px;
+    padding: 15px 0;
+    font-size: 1.5em;
+}
 
-    background: rgb(87, 197, 160);
+.addCartDetail{
+    background: rgb(255, 89, 85);
     color: #FFF;
     width: 50px;
-    padding: 15px 0;
+    padding: 15px 20px!important;
     font-size: 1.5em;
 }
+
 
 .onsale-tag, .outofstock-tag{
     position: absolute;
@@ -288,6 +298,113 @@ h1 span{
 .outofstock-tag{
     background: rgb(242, 126, 75);
 }
+
+/* CHECKOUT */
+
+#paper {
+    color:#FFF;
+    font-size:20px;
+}
+#margin {
+    font-size: 20px;
+}
+#text {
+    width:500px;
+    overflow:hidden;
+    background-color:#FFF;
+    color:#222;
+    font-family:Courier, monospace;
+    font-weight:normal;
+    font-size:24px;
+    resize:none;
+    line-height:40px;
+    padding-left:100px;
+    padding-right:100px;
+    padding-top:45px;
+    padding-bottom:34px;
+    background-image:url(https://static.tumblr.com/maopbtg/E9Bmgtoht/lines.png), url(https://static.tumblr.com/maopbtg/nBUmgtogx/paper.png);
+    background-repeat:repeat-y, repeat;
+    -webkit-border-radius:12px;
+    border-radius:12px;
+    -webkit-box-shadow: 0px 2px 14px #000;
+    box-shadow: 0px 2px 14px #000;
+    border-top:1px solid #FFF;
+    border-bottom:1px solid #FFF;
+}
+#title {
+    background-color:transparent;
+    border-bottom:3px solid #FFF;
+    color:#FFF;
+    font-size:20px;
+    font-family:Courier, monospace;
+    height:28px;
+    font-weight:bold;
+    width:220px;
+}
+#button {
+    cursor:pointer;
+    margin-bottom:20px;
+    margin-right: 20px;
+    float:right;
+    height:40px;
+    padding-left:24px;
+    padding-right:24px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    font-size:20px;
+    color:#FFF;
+    text-shadow: 0px -1px 0px #000000;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+    border-top:1px solid #FFF;
+    -webkit-box-shadow: 0px 2px 14px #000;
+    box-shadow: 0px 2px 14px #000;
+    background-color: #62add6;
+    background-image:url(https://static.tumblr.com/maopbtg/ZHLmgtok7/button.png);
+    background-repeat:repeat-x;
+}
+#buttonTotal {
+     width: 200px;
+     text-align: center;
+     margin: 20px 0;
+     height:40px;
+     padding: 0 20px;
+     font-family:Arial, Helvetica, sans-serif;
+     font-weight:bold;
+     font-size:20px;
+     color:#FFF;
+     text-shadow: 0px -1px 0px #000000;
+     -webkit-border-radius:8px;
+     border-radius:8px;
+     border-top:1px solid #FFF;
+     -webkit-box-shadow: 0px 2px 14px #000;
+     box-shadow: 0px 2px 14px #000;
+     background-color: #62add6;
+     background-image:url(https://static.tumblr.com/maopbtg/ZHLmgtok7/button.png);
+     background-repeat:repeat-x;
+ }
+#button:active {
+    zoom: 1;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+}
+#button:focus {
+    zoom: 1;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+}
+#buttonTotal:active {
+    zoom: 1;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+}
+#buttonTotal:focus {
+    zoom: 1;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+}
+
+
 /*DETAIL*/
 .product-img{
     width: 450px;
@@ -295,14 +412,15 @@ h1 span{
     border: 2px solid #999;
 }
 .detail-content{
-    padding: 50px 0;
+    padding-top: 50px;
 }
 .detail-content .container{
-    padding: 60px 0;
+    padding-top: 60px;
     overflow: hidden;
 }
 .product-info{
     margin: 0 0 0 80px;
+    height: 550px;
 }
 .detail-content h2{
     background: rgb(178, 97, 96);

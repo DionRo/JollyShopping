@@ -31,7 +31,7 @@
                         </li>
                     @elseif($type == 'clothing')
                         <form class="product-filter" action="{{action('pagesController@filterProducts')}}">
-                            {{csrf_field()}}
+                        {{csrf_field()}}
                             <input type="hidden" name="type" value="allClothing">
                             <input type="submit" value="Kleren">
                         </form>
@@ -176,7 +176,7 @@
                             <img src="{{$product->picture}}" alt="product">
                             <h3>{{$product->name}}</h3>
                             @if(Auth::Check() == True)
-                            <a  id="{{$product->id}}" href="{{action('pagesController@getAddToCart', $product->id)}}"  role="button">Voeg toe aan winkelwagen</a>
+                            <a class="addCartMain" id="{{$product->id}}" href="{{action('pagesController@getAddToCart', $product->id)}}"  role="button"><i class="fas fa-cart-plus"></i></a>
                             @endif
                             <p class="price-tag">&#8364;{{$product->price}}</p>
                             @if($product->stock == 0)

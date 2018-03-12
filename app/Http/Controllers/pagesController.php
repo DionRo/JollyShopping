@@ -23,15 +23,32 @@ class pagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function checkOut()
+    public function checkOut(Request $request)
     {
+        $request->validate([
+            'specify' => 'required'
+        ]);
+
         if(!Session::has('cart'))
         {
             return view('shoppingcart');
         }
         $cart = Session::get('cart');
-        dd($cart);
 
+        foreach ($cart->items as $item)
+        {
+           $order = new \App\Order();
+           $order->user_id = Auth::user()->id;
+           $order->user_email = Auth::user()->email;
+           $order->product_id = $item["item"]->id;
+           $order->totalPrice = $cart->totalPrice;
+           $order->specify = $request->specify;
+
+           $order->save();
+
+        }
+        session()->forget('cart');
+        return 'hi';
     }
     public function getCart()
     {
@@ -79,7 +96,7 @@ class pagesController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return redirect('products');
+        return back();
 
     }
     public function addUpProduct (Request $request, $id)
