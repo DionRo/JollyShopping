@@ -35,16 +35,29 @@ class pagesController extends Controller
         }
         $cart = Session::get('cart');
 
+        $order =  \App\Order::All();
+        if ($order->count() == 0)
+        {
+            $orderId = 1;
+        }
+        else
+        {
+            $orderId = $order->last()->orderId;
+            $orderId += 1;
+
+        }
         foreach ($cart->items as $item)
         {
-           $order = new \App\Order();
-           $order->user_id = Auth::user()->id;
-           $order->user_email = Auth::user()->email;
-           $order->product_id = $item["item"]->id;
-           $order->totalPrice = $cart->totalPrice;
-           $order->specify = $request->specify;
+           $newOrder = new \App\Order();
+           $newOrder->orderId = $orderId;
+           $newOrder->user_id = Auth::user()->id;
+           $newOrder->user_email = Auth::user()->email;
+           $newOrder->product_id = $item["item"]->id;
+           $newOrder->amountOrder = $item["qty"];
+           $newOrder->totalPrice = $cart->totalPrice;
+           $newOrder->specify = $request->specify;
 
-           $order->save();
+           $newOrder->save();
 
         }
         session()->forget('cart');
@@ -417,6 +430,31 @@ class pagesController extends Controller
         return view('admin/accessoriesOverview')
             ->with('admin', $admin)
             ->with('accessories', $accessories);
+    }
+
+    /**
+     *
+     */
+    public function orderOverview()
+    {
+        $admin = \App\Admin::find(1);
+        $warehouseProducts = \App\Order::
+        select('orderId','user_id', 'totalPrice')
+            ->groupBy('orderId', 'user_id', 'totalPrice')
+            ->paginate(6);
+
+        return view('admin/ordersOverview')
+            ->with('admin', $admin)
+            ->with('orders', $warehouseProducts);
+    }
+    public function adminDetail($id)
+    {
+        $admin = \App\Admin::find(1);
+        $orders = \App\Order::select('*')->where('orderId', '=', $id)->get();
+
+        return view('/admin/showOrder')
+            ->with('admin', $admin)
+            ->with('orders', $orders);
     }
 
     public function jewerliesOverview()

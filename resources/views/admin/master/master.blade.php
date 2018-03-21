@@ -30,6 +30,7 @@
                 <li><a href="/admin/jewerlies">Overzicht sieraden</a></li>
                 <li><a href="/admin/categories">Overzicht categorien</a></li>
                 <li><a href="/admin/newsletters">Overzicht nieuwsbrief</a></li>
+                <li><a href="/admin/orders">Overzicht Orders</a></li>
                 <li><a href="{{action('clothingController@create')}}">Kleding toevoegen</a></li>
                 <li><a href="{{action('accessoriesController@create')}}">Accessoire toevoegen</a></li>
                 <li><a href="{{action('jewerlyController@create')}}">Sieraad toevoegen</a></li>

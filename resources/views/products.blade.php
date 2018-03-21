@@ -176,7 +176,7 @@
                             <img src="{{$product->picture}}" alt="product">
                             <h3>{{$product->name}}</h3>
                             @if(Auth::Check() == True)
-                            <a class="addCartMain" id="{{$product->id}}" href="{{action('pagesController@getAddToCart', $product->id)}}"  role="button"><i class="fas fa-cart-plus"></i></a>
+                            <a  id="{{$product->id}}" href="{{action('pagesController@getAddToCart', $product->id)}}"  role="button"><i class="fas fa-cart-plus"></i></a>
                             @endif
                             <p class="price-tag">&#8364;{{$product->price}}</p>
                             @if($product->stock == 0)

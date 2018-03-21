@@ -28,6 +28,8 @@ route::get('/admin/jewerlies/{id}', 'jewerlyController@adminDetail');
 route::get('/admin/jewerlies', 'pagesController@jewerliesOverview');
 route::get('/sendNewsletter/{id}', 'newsletterController@sendNewsletter');
 route::get('/unsubscribe/{email}/{securityToken}', 'userController@unsubscribe');
+route::get('/admin/orders', 'pagesController@orderOverview');
+route::get('/admin/orders/{id}', 'pagesController@adminDetail');
 route::post('/subscribe', 'userController@subscribe');
 route::post('/sendmail', 'pagesController@sendEmail');
 
@@ -40,6 +42,9 @@ route::get('/shopping-cart/addUp/{id}' , 'pagesController@addUpProduct');
 route::get('/shopping-cart/removeSingle/{id}' , 'pagesController@removeSingle');
 route::get('/shopping-cart/removeProduct/{id}' , 'pagesController@removeProduct');
 route::post('/checkout', 'pagesController@checkOut');
+
+
+
 // wrong route
 Route::get('/sales/{id}', function ($id){;
     $product = \App\Product::find($id);
