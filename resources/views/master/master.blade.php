@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <meta name="viewport" content="width=device-width"/>
     <script src="../js/jquery.js"></script>
+    <script src="../js/main.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <meta name="google-site-verification" content="nZjliQF8W3kaZe_OFICzIDElc3G7xaXt50zoiQBBrLM" />
 </head>
@@ -107,6 +108,5 @@
         </div>
     </div>
 </footer>
-<script src="../js/dropdown.js"></script>
 </body>
 </html>

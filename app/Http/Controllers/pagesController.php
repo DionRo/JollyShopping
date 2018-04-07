@@ -63,7 +63,7 @@ class pagesController extends Controller
         session()->forget('cart');
         return 'hi';
     }
-    public function getCart()
+    public function getCart(Request $request)
     {
         if(!Session::has('cart'))
         {
@@ -205,6 +205,7 @@ class pagesController extends Controller
     public function filterProducts(Request $request)
     {
         $full = [['type', '=', $request->type]];
+        $sizesList = [];
 
         $genders = ['Vrouw', 'Man'];
         $colors = ['Zwart', 'Wit', 'Rood', 'Groen', 'Blauw', 'Bruin', 'Geel', 'Oranje', 'Grijs'];
@@ -252,6 +253,7 @@ class pagesController extends Controller
                 $categories = \App\Category::where('type', '=', 'clothing')->get();
 
                 $clothing = new \App\Product;
+                $sizes = new \App\Size;
 
                 if ($request->categories != null) {
                     $full = $clothing::filterClothes(['category_id', '=', $request->categories], $full);
@@ -268,6 +270,96 @@ class pagesController extends Controller
                 if ($request->maxPrice != '500') {
                     $full = $clothing::filterClothes(['price', '<=', (int)$request->maxPrice], $full);
                 }
+                if($request->sizeS == "on"){
+                    $filterSizes = $sizes::where('size', '=', 'S')->get();
+                    $amountSizes = $filterSizes->count();
+                    $i = 1;
+                    
+                    if($amountSizes > 0){
+                        foreach($filterSizes as $filterSize){
+                            array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
+    
+                            if($i != $amountSizes){
+                                array_push($sizesList, '||');
+                            }
+    
+                            $i++;
+                        }
+
+                        if($request->sizeM == "on" || $request->sizeL == "on" || $request->sizeXL == "on"){ array_push($sizesList, '||'); };
+                        
+                        $full = $clothing::filterClothes($sizesList, $full);
+                    }
+
+                }
+
+                if($request->sizeM == "on"){
+                    $filterSizes = $sizes::where('size', '=', 'M')->get();
+                    $amountSizes = $filterSizes->count();
+                    $i = 1;
+                    
+                    if($amountSizes > 0){
+
+                        if($request->sizeS == "on"){ array_push($sizesList, '||'); };                        
+                        
+                        foreach($filterSizes as $filterSize){
+                            array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
+    
+                            if($i != $amountSizes){
+                                array_push($sizesList, '||');
+                            }
+    
+                            $i++;
+                        }
+    
+                        if($request->sizeL == "on" || $request->sizeXL == "on"){ array_push($sizesList, '||'); };
+                        
+                        $full = $clothing::filterClothes($sizesList, $full);
+                    }
+                }
+                if($request->sizeL == "on"){
+                    $filterSizes = $sizes::where('size', '=', 'L')->get();
+                    $amountSizes = $filterSizes->count();
+                    $i = 1;
+                    
+                    if($amountSizes > 0){
+                        
+                        if($request->sizeS == "on" || $request->sizeM == "on"){ array_push($sizesList, '||'); };                        
+                        
+                        foreach($filterSizes as $filterSize){
+                            array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
+    
+                            if($i != $amountSizes){
+                                array_push($sizesList, '||');
+                            }
+    
+                            $i++;
+                        }
+                        
+                        $full = $clothing::filterClothes($sizesList, $full);
+                    }
+                }
+                if($request->sizeXL == "on"){
+                    $filterSizes = $sizes::where('size', '=', 'XL')->get();
+                    $amountSizes = $filterSizes->count();
+                    $i = 1;
+                    
+                    if($amountSizes > 0){
+
+                        if($request->sizeS == "on" || $request->sizeM == "on" || $request->sizeL == "on"){ array_push($sizesList, '||'); };                        
+                        
+                        foreach($filterSizes as $filterSize){
+                            array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
+    
+                            if($i != $amountSizes){
+                                array_push($sizesList, '||');
+                            }
+    
+                            $i++;
+                        }
+                        $full = $clothing::filterClothes($sizesList, $full);
+                    }
+                }
 
                 if ($full != null) {
                     $products = \App\Product::select('*')
@@ -275,8 +367,8 @@ class pagesController extends Controller
                         ->paginate(9);
                 } else {
                     $products = \App\Product::where('type', '=', 'clothing');
-                }
-
+                }   
+//dd($products);
                 break;
 
             case('accessory'):

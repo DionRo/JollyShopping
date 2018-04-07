@@ -64,6 +64,24 @@
                                     @endfor
                                 </select>
                             </div>
+                            <div class="form-group sizes">
+                                <div class="form-group">
+                                    <input id="sizeS" name="sizeS" type="checkbox">
+                                    <label for="sizeS">S</label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="sizeM" name="sizeM" type="checkbox">
+                                    <label for="sizeM">M</label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="sizeL" name="sizeL" type="checkbox">
+                                    <label for="sizeL">L</label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="sizeXL" name="sizeXL" type="checkbox">
+                                    <label for="sizeXL">XL</label>
+                                </div>
+                            </div>
                             <div class="form-group flex">
                                 <div>
                                     <label for="minPrice">Min Prijs</label>
@@ -175,9 +193,9 @@
                         <li class="new-product align-center">
                             <img src="{{$product->picture}}" alt="product">
                             <h3>{{$product->name}}</h3>
-                            @if(Auth::Check() == True)
-                            <a  id="{{$product->id}}" href="{{action('pagesController@getAddToCart', $product->id)}}"  role="button"><i class="fas fa-cart-plus"></i></a>
-                            @endif
+                            <!-- @if(Auth::Check() == True)
+                            <a class="addCart"  id="{{$product->id}}" href="{{action('pagesController@getAddToCart', $product->id)}}"  role="button"><i class="fas fa-cart-plus"></i></a>
+                            @endif -->
                             <p class="price-tag">&#8364;{{$product->price}}</p>
                             @if($product->stock == 0)
                                 <p class="outofstock-tag">OUT OF STOCK</p>

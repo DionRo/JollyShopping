@@ -4,10 +4,11 @@
     @if(Session::has('cart'))
  <div class="main-content">
      <div class="container">
-        <div class="catalogus">
+        <div class="shopping-cart">
             <h2 style="font-size: 40px;">Uw winkelwagen ()</h2>
+            <ul>
                 @foreach($products as $product)
-                 <div style="padding: 10px 20px; margin: 10px 0; background-color: #ffffff; border-radius: 20px;">
+                 <li class="cart-item">
                      <div class="flex">
                         <img src="{{$product['item']['picture']}}" alt="" style="width: 200px; height: 200px;">
                         <ul>
@@ -17,29 +18,30 @@
                                 <li style="font-size: 20px">Prijs per stuk:&#8364 {{$product['item']['price']}}</li>
                             @endif
                             <li style="font-size: 20px">Totaal:&#8364 {{$product['price']}}</li>
+                            <li><a href="{{action('pagesController@addUpProduct' , $product['item']['id'])}}"></li>
+                            <li><i style="font-size: 20px" class="fas fa-arrow-up"></i></li>
+                            Verhoog aantal
+                        </a>
+                        @if($product['qty'] == 1)
+                            <li><a style="display: none;" href="{{action('pagesController@removeSingle' , $product['item']['id'])}}">
+                                <i style="font-size: 20px" class="fas fa-arrow-down"></i>
+                                Verlaag aantal
+                            </a></li>
+                        @else
+                            <li><a  href="{{action('pagesController@removeSingle' , $product['item']['id'])}}">
+                                <i style="font-size: 20px" class="fas fa-arrow-down"></i>
+                                Verlaag aantal
+                            </a></li>
+                        @endif
+                            <li><a href="{{action('pagesController@removeProduct' , $product['item']['id'])}}">
+                                <i  style="font-size: 20px;" class="far fa-trash-alt"></i>
+                                Verwijder alles
+                            </a></li>
                         </ul>
                      </div>
-                     <a href="{{action('pagesController@addUpProduct' , $product['item']['id'])}}">
-                         <i style="font-size: 20px" class="fas fa-arrow-up"></i>
-                         Verhoog aantal
-                     </a>
-                     @if($product['qty'] == 1)
-                         <a style="display: none;" href="{{action('pagesController@removeSingle' , $product['item']['id'])}}">
-                             <i style="font-size: 20px" class="fas fa-arrow-down"></i>
-                             Verlaag aantal
-                         </a>
-                     @else
-                         <a  href="{{action('pagesController@removeSingle' , $product['item']['id'])}}">
-                             <i style="font-size: 20px" class="fas fa-arrow-down"></i>
-                             Verlaag aantal
-                         </a>
-                     @endif
-                     <a href="{{action('pagesController@removeProduct' , $product['item']['id'])}}">
-                         <i  style="font-size: 20px;" class="far fa-trash-alt"></i>
-                         Verwijder alles
-                     </a>
-                 </div>
+                 </li>
                 @endforeach
+            </ul>
             <div style="text-align: center">
                 <input id="buttonTotal" value="Totaal prijs: {{$totalPrice}}"readonly >
                 <div id="margin">Lees de instructies duidelijk!(gebruik de annotatie in het textveld!)</div>

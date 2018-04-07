@@ -58,9 +58,9 @@
                                 <li class="new-product align-center">
                                     <img src="{{$clothing[$i]->picture}}" alt="product">
                                     <h3>{{$clothing[$i]->name}}</h3>
-                                    @if(Auth::Check() == True)
+                                    <!-- @if(Auth::Check() == True)
                                         <a class="addCart" href="{{action('pagesController@getAddToCartMain', $clothing[$i]->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
-                                    @endif
+                                    @endif -->
                                     <p class="price-tag">&#8364;{{$clothing[$i]->price}}</p>
                                     @if($clothing[$i]->stock == 0)
                                         <p class="outofstock-tag">OUT OF STOCK</p>
@@ -92,9 +92,9 @@
                                 <li class="new-product align-center">
                                     <img src="{{$accessories[$i]->picture}}" alt="product">
                                     <h3>{{$accessories[$i]->name}}</h3>
-                                    @if(Auth::Check() == True)
+                                    <!-- @if(Auth::Check() == True)
                                         <a class="addCart" href="{{action('pagesController@getAddToCartMain', $accessories[$i]->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
-                                    @endif
+                                    @endif -->
                                     <p class="price-tag">&#8364;{{$accessories[$i]->price}}</p>
                                     @if($accessories[$i]->stock == 0)
                                         <p class="outofstock-tag">OUT OF STOCK</p>
@@ -126,9 +126,9 @@
                                 <li class="new-product align-center">
                                     <img src="{{$jewerlies[$i]->picture}}" alt="product">
                                     <h3>{{$jewerlies[$i]->name}}</h3>
-                                    @if(Auth::Check() == True)
+                                    <!-- @if(Auth::Check() == True)
                                         <a class="addCart" href="{{action('pagesController@getAddToCartMain', $jewerlies[$i]->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
-                                    @endif
+                                    @endif -->
                                     <p class="price-tag">&#8364;{{$jewerlies[$i]->price}}</p>
                                     @if($jewerlies[$i]->stock == 0)
                                         <p class="outofstock-tag">OUT OF STOCK</p>

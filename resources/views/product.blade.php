@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="main-content detail-content">
-    <div class="container  flex ">
+    <div class="container flex ">
         <img class="product-img" src="{{$product->picture}}" alt="product">
         <div class="product-info">
             <h2>{{$product->name}}</h2>
@@ -20,8 +20,12 @@
                 <h3 class="size">Maten</h3>
                 <ul class="sizes flex">
                     @foreach($sizes as $size)
-                        <li>{{$size->size}}</li>
+                        <li>
+                        <input id="size-{{$size->size}}" name="size" type="radio" data-id="{{$size->id}}" @if($sizes[0]->id == $size->id) checked @endif>
+                        <label for="size-{{$size->size}}" class"size-{{$size->size}}">{{$size->size}}</label>
+                        </li>
                     @endforeach
+
                 </ul>
             @endif
             <h3 class="description">Beschrijving</h3>
@@ -29,10 +33,15 @@
             <br>
         </div>
     </div>
-</div>
-<div class="container" style="text-align: center; height: 50px;padding-top: 20px;">
-        @if(Auth::Check() == True)
-            <a  class="addCartDetail" href="{{action('pagesController@getAddToCartDetail', $product->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
-        @endif
+    @if(Auth::Check() == True)
+        <div class="addCartContainer">
+            <form action="{{action('pagesController@getAddToCartDetail', $product->id)}}">
+                @if(isset($sizes))
+                    <input type="hidden" id="size-id" name="size-id" value="{{$sizes[0]->id}}">
+                @endif
+                <input type="submit" class="addCartDetail" value="Bestel Nu" >
+            </form>
+        </div>
+    @endif
 </div>
 @endsection
