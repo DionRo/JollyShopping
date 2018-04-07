@@ -63,7 +63,7 @@ class pagesController extends Controller
         session()->forget('cart');
         return 'hi';
     }
-    public function getCart(Request $request)
+    public function getCart()
     {
         if(!Session::has('cart'))
         {
@@ -80,6 +80,7 @@ class pagesController extends Controller
     {
         $product = \App\Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
+
         $cart = new Cart($oldCart);
 
         $cart->add($product, $product->id);
