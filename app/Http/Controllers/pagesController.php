@@ -76,7 +76,7 @@ class pagesController extends Controller
             ->with('products' , $cart->items)
             ->with('totalPrice', $cart->totalPrice );
     }
-    public function getAddToCartMain(Request $request, $id)
+   /* public function getAddToCartMain(Request $request, $id)
     {
         $product = \App\Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -88,7 +88,7 @@ class pagesController extends Controller
         $request->session()->put('cart', $cart);
         return redirect('/');
 
-    }
+    } */
     public function getAddToCartDetail(Request $request, $id)
     {
         $product = \App\Product::find($id);

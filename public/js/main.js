@@ -1,13 +1,27 @@
 $(document).ready(function () {
-   
-    function fillHref(){
-        const elSizeId = $(".sizes input[type=radio]:checked").data("id");
-        const elSizeIdHidden = $("#size-id");
-        elSizeIdHidden.val(elSizeId);
-    }
+    const productId = $("#product-id").val();
+    let href = $(".addCartContainer form").attr("action");
+    let action =  $(".addCartContainer form");
+    let elSizeId = $(".sizes input[type=radio]:checked").data("id")
+let elSizeOld = $(".sizes input[type=radio]:checked").data("id");
 
-    $(".sizes input[type=radio]").change(function () {
-        fillHref();
-    });
+elSizeOld = elSizeOld.toString();
+elSizeId = elSizeId.toString();
 
+href = href.replace(productId, "");
+href = href + elSizeId;
+
+function fillHref(){
+    href.replace(elSizeId, "");
+    elSizeId = $(".sizes input[type=radio]:checked").data("id").toString();
+    elSizeId = elSizeId.toString();
+    href = href + elSizeId;
+    action.attr("action", href);
+    elSizeOld = elSizeId;
+    console.log(href);
+}
+
+$(".sizes input[type=radio]").change(function () {
+    fillHref();
+});
 });

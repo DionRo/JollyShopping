@@ -287,7 +287,7 @@ h1 span{
 }
 
 .shopping-cart .cart-item{
-    padding-bottom: 10px;
+    padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
 
@@ -300,7 +300,6 @@ h1 span{
 }
 
 .shopping-cart .cart-item:last-child{
-    padding: 0;
     border: none;
 }
 
@@ -453,7 +452,7 @@ h1 span{
     padding-top: 50px;
 }
 .detail-content .container{
-    padding-top: 60px;
+    padding: 50px 0;
     overflow: hidden;
 }
 .product-info{
