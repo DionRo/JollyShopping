@@ -14,9 +14,6 @@
                         <ul>
                             <li style="font-size: 25px; font-weight: bold;">{{$product['item']['name']}}</li>
                             <li style="font-size: 20px">Aantal: {{$product['qty']}}</li>
-                            @if($product['qty'] > 1)
-                                <li style="font-size: 20px">Prijs per stuk:&#8364 {{$product['item']['price']}}</li>
-                            @endif
                             <li style="font-size: 20px">Totaal:&#8364 {{$product['price']}}</li>
                             <li><a href="{{action('pagesController@addUpProduct' , $product['item']['id'])}}"></li>
                             <li><i style="font-size: 20px" class="fas fa-arrow-up"></i></li>

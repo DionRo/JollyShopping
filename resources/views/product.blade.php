@@ -21,8 +21,8 @@
                 <ul class="sizes flex">
                     @foreach($sizes as $size)
                         <li>
-                        <input id="size-{{$size->size}}" name="size" type="radio" data-id="{{$size->id}}" @if($sizes[0]->id == $size->id) checked @endif>
-                        <label for="size-{{$size->size}}" class"size-{{$size->size}}">{{$size->size}}</label>
+                        <input id="size-{{$size->size}}" name="size" type="radio" data-id="{{$size->id}}" @if($sizes[0]->id == $size->id) data-checked="true" checked @else data-checked="false" @endif>
+                        <label for="size-{{$size->size}}" class="size-{{$size->size}}">{{$size->size}}</label>
                         </li>
                     @endforeach
 
@@ -37,7 +37,8 @@
         <div class="addCartContainer">
             <form action="{{action('pagesController@getAddToCartDetail', $product->id)}}">
                 @if(isset($sizes))
-                    <input type="hidden" id="size-id" name="size-id" value="{{$sizes[0]->id}}">
+                    <input type="hidden" id="size-id" name="size-id" value="clothing">
+                    <input type="hidden" id="product-id" name="product-id" value="{{$product->id}}">
                 @endif
                 <input type="submit" class="addCartDetail" value="Bestel Nu" >
             </form>
