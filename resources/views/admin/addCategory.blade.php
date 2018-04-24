@@ -20,7 +20,7 @@
                     <div class="form-group flex flex-between">
                         <label for="category">Categorie Type</label>
                         <select name="category" id="category">
-                            <option value="Clothing">Kleren</option>
+                            <!--<option value="Clothing">Kleren</option>-->
                             <option value="Accessory">Accesories</option>
                             <option value="Jewelry">Sieraden</option>
                         </select>

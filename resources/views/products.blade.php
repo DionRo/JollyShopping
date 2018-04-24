@@ -8,13 +8,13 @@
             <div class="filter align-center">
                 <ul>
                     @if(!isset($type))
-                        <li>
+                        <!--<li>
                             <form action="{{action('pagesController@filterProducts')}}">
                                 {{csrf_field()}}
                                 <input type="hidden" name="type" value="allClothing">
                                 <input type="submit" value="Kleren">
                             </form>
-                        </li>
+                        </li>-->
                         <li>
                             <form action="{{action('pagesController@filterProducts')}}">
                                 {{csrf_field()}}
@@ -27,78 +27,6 @@
                                 {{csrf_field()}}
                                 <input type="hidden" name="type" value="allJewerlies">
                                 <input type="submit" value="Sieraden">
-                            </form>
-                        </li>
-                    @elseif($type == 'clothing')
-                        <form class="product-filter" action="{{action('pagesController@filterProducts')}}">
-                        {{csrf_field()}}
-                            <input type="hidden" name="type" value="allClothing">
-                            <input type="submit" value="Kleren">
-                        </form>
-                        <form action="{{action('pagesController@filterProducts')}}">
-                            {{csrf_field()}}
-                            <div class="form-group">
-                                <label for="categories"></label>
-                                <select name="categories" id="categories" value="{{old('categories')}}">
-                                    <option value="" @if(!isset($request->categories)) selected @endif hidden>Categorie</option>
-                                    @for($i = 0; $i < count($categories); $i++)
-                                        <option value="{{$categories[$i]->id}}" @if(isset($request->categories)) @if(($request->categories) == $categories[$i]->id) selected @endif @endif>{{$categories[$i]->name}}</option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="gender"></label>
-                                <select name="gender" id="gender">
-                                    <option value="" @if(!isset($request->gender)) selected @endif hidden>Man / Vrouw</option>
-                                    @for($i = 0; $i < count($genders); $i++)
-                                        <option value="{{$i}}" @if(isset($request->gender)) @if($request->gender == $i) selected="selected" @endif @endif>{{$genders[$i]}}</option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="color"></label>
-                                <select name="color" id="color">
-                                    <option value="" @if(!isset($request->color)) selected @endif hidden>Kleur</option>
-                                    @for($i = 0; $i < count($colors); $i++)
-                                        <option value="{{$colors[$i]}}" @if(isset($request->color)) @if($request->color == $colors[$i]) selected @endif @endif>{{$colors[$i]}}</option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="form-group sizes">
-                                <div class="form-group">
-                                    <input id="sizeS" name="sizeS" type="checkbox">
-                                    <label for="sizeS">S</label>
-                                </div>
-                                <div class="form-group">
-                                    <input id="sizeM" name="sizeM" type="checkbox">
-                                    <label for="sizeM">M</label>
-                                </div>
-                                <div class="form-group">
-                                    <input id="sizeL" name="sizeL" type="checkbox">
-                                    <label for="sizeL">L</label>
-                                </div>
-                                <div class="form-group">
-                                    <input id="sizeXL" name="sizeXL" type="checkbox">
-                                    <label for="sizeXL">XL</label>
-                                </div>
-                            </div>
-                            <div class="form-group flex">
-                                <div>
-                                    <label for="minPrice">Min Prijs</label>
-                                    <input type="number" name="minPrice" id="minPrice" min="0" max="499" @if(isset($request->minPrice)) value="{{$request->minPrice}}" @else value="0" @endif>
-                                </div>
-                                <div>
-                                    <label for="maxPrice">Max Prijs</label>
-                                    <input type="number" name="maxPrice" id="maxPrice" min="1" max="500" @if(isset($request->maxPrice)) value="{{$request->maxPrice}}" @else value="500" @endif>
-                                </div>
-                            </div>
-                            <input type="hidden" name="type" value="clothing">
-                            <input type="submit" value="Save" class="submit">
-                        </form>
-                        <li>
-                            <form action="{{action('pagesController@products')}}">
-                                {{csrf_field()}}
-                                <input type="submit" value="Ga terug">
                             </form>
                         </li>
                     @elseif($type == 'accessories')
@@ -202,7 +130,7 @@
                             @elseif($product->discount > 0)
                                 <p class="onsale-tag">ON SALE</p>
                             @endif
-                            <form class="view-product" method="get" action="@if($product->type === 'clothing'){{action('clothingController@show', $product->id)}}
+                            <form class="view-product" method="get" action="@if($product->type === 'clothing')
                                                                             @elseif($product->type === 'accessory') {{action('accessoriesController@show', $product->id)}}
                                                                             @else {{action('jewerlyController@show', $product->id)}}
                                                                             @endif">

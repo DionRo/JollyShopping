@@ -28,7 +28,7 @@
                 <li id="gallery"><div class="product-overlay flex flex-center align-center">
                         <form action="{{action('pagesController@filterProducts')}}">
                             {{csrf_field()}}
-                            <input type="hidden" name="type" value="allClothing">
+                            <input type="hidden" name="type" value="allJewerlies">
                             <input type="submit" value="Kleding">
                         </form>
                     </div></li>
@@ -43,40 +43,7 @@
     <div class="main-content">
         <div class="new-products">
             <div class="container">
-                <div class="clothes">
-                    <div class="flex flex-between">
-                        <h2>Nieuwste Kleding</h2>
-                        <form action="{{action('pagesController@filterProducts')}}">
-                            {{csrf_field()}}
-                            <input type="hidden" name="type" value="allClothing">
-                            <input class="show-all" type="submit" value="Show All">
-                        </form>
-                    </div>
-                    <ul class="flex flex-between">
-                        @for($i = 0 ; $i < count($clothing) ; $i++)
-                            @if ($i < 3)
-                                <li class="new-product align-center">
-                                    <img src="{{$clothing[$i]->picture}}" alt="product">
-                                    <h3>{{$clothing[$i]->name}}</h3>
-                                    <!-- @if(Auth::Check() == True)
-                                        <a class="addCart" href="{{action('pagesController@getAddToCartMain', $clothing[$i]->id)}}" role="button"><i class="fas fa-cart-plus"></i></a>
-                                    @endif -->
-                                    <p class="price-tag">&#8364;{{$clothing[$i]->price}}</p>
-                                    @if($clothing[$i]->stock == 0)
-                                        <p class="outofstock-tag">OUT OF STOCK</p>
-                                    @elseif($clothing[$i]->discount > 0)
-                                        <p class="onsale-tag">ON SALE!</p>
-                                    @endif
-                                    <form class="view-product" method="get" action="{{action('clothingController@show', $clothing[$i]->id)}}">
-                                        {{csrf_field()}}
-                                        <input class="view" type="image" src="img/view.png">
-                                        <input type="submit" value="">
-                                    </form>
-                                </li>
-                            @endif
-                        @endfor
-                    </ul>
-                </div>
+                
                 <div class="accessories">
                     <div class="flex flex-between">
                         <h2>Nieuwste Accessiores</h2>
