@@ -319,7 +319,6 @@ h1 span{
     border-radius: 3px;
 }
 
-
 .onsale-tag, .outofstock-tag{
     position: absolute;
     top: 0;
@@ -926,7 +925,28 @@ html, body, .admin, .admin .main-content{
 .edit .sizes label, .add-product .sizes label{
     width: 50px;
 }
-
+.status{
+    position: relative;
+}
+.order-delete{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+input[data-active="true"]{
+    background: #398F83;
+}
+.order-item{
+    padding: 15px;
+    border-bottom: 1px solid #dfdfdf;
+}
+.order-item:last-child{
+    border: none;
+}
+.order-item img{
+    width: 200px;
+    height: auto;
+}
 
 /*FOOTER*/
 footer{

@@ -30,6 +30,7 @@ route::get('/sendNewsletter/{id}', 'newsletterController@sendNewsletter');
 route::get('/unsubscribe/{email}/{securityToken}', 'userController@unsubscribe');
 route::get('/admin/orders', 'pagesController@orderOverview');
 route::get('/admin/orders/{id}', 'pagesController@adminDetail');
+route::get('/admin/orderprocess/{id}', 'pagesController@orderProcess');
 route::post('/subscribe', 'userController@subscribe');
 route::post('/sendmail', 'pagesController@sendEmail');
 

@@ -532,8 +532,8 @@ class pagesController extends Controller
     {
         $admin = \App\Admin::find(1);
         $warehouseProducts = \App\Order::
-        select('orderId','user_id', 'totalPrice')
-            ->groupBy('orderId', 'user_id', 'totalPrice')
+        select('orderId','user_id', 'totalPrice', 'isProcessed')
+            ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
             ->paginate(6);
 
         return view('admin/ordersOverview')
@@ -544,10 +544,23 @@ class pagesController extends Controller
     {
         $admin = \App\Admin::find(1);
         $orders = \App\Order::select('*')->where('orderId', '=', $id)->get();
-
         return view('/admin/showOrder')
             ->with('admin', $admin)
             ->with('orders', $orders);
+    }
+
+    public function orderProcess($id, Request $request){
+        $order = \App\Order::find($id);
+
+        if($request->processValue == 'delete'){
+            $order->delete();
+            return redirect('/admin/orders');
+        }
+
+        $order->isProcessed = $request->processValue;
+        $order->save();
+
+        return redirect('/admin/orders/' . $id);
     }
 
     public function jewerliesOverview()

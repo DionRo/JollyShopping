@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $primaryKey = 'orderId';
 
+    public function user()
+    {
+        return $this->belongsTo('\App\User');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo('\App\product');
+    }
 }

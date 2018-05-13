@@ -9,9 +9,9 @@
                 <li>
                     <div class="flex">
                         <div>
-                            <h5>Order #{{$order->orderId}}</h5>
+                            <h5>Bestelling van: {{$order->user->firstname}} {{$order->user->lastname}}</h5>
                             <p>Totaalprijs: {{$order->totalPrice}}</p>
-                            <p>Besteld door KlantNr: {{$order->user_id}}</p>
+                            <p>Status: @switch($order->isProcessed) @case(1) Betaling in afwachting @break @case(2) Betaald @break @case(3) Verzonden @break @default Nieuw @break  @endswitch</p>
                         </div>
                     </div>
                     <form method="get" action="{{action('pagesController@adminDetail', $order->orderId)}}">

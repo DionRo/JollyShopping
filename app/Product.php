@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->belongsTo('\App\Category');
     }
+
+    public function order()
+    {
+        return $this->hasMany('\App\Order');
+    }
 }
