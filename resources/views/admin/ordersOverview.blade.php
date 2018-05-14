@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="clothes-overview">
-        <h4>Overzicht Kleding</h4>
+        <h4>Overzicht Orders</h4>
         <ul class="overview">
             @foreach($orders as $order)
                 <li>
@@ -25,5 +25,4 @@
         </ul>
         {{$orders->links()}}
     </div>
-
 @endsection

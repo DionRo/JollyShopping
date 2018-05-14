@@ -29,7 +29,7 @@
                         <form action="{{action('pagesController@filterProducts')}}">
                             {{csrf_field()}}
                             <input type="hidden" name="type" value="allJewerlies">
-                            <input type="submit" value="Kleding">
+                            <input type="submit" value="Sieraden">
                         </form>
                     </div></li>
                 <li id="most-viewed"><div class="product-overlay flex flex-center align-center">
