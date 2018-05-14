@@ -13,6 +13,7 @@
                     <p>Geslacht: {{$user->gender}}</p>
                     <form method="POST" action="{{action('userController@edit', $user->id)}}">
                         {{csrf_field()}}
+                        {{method_field('PUT')}}
                         <input class="view" type="image" src="../img/view.png">
                         <input type="submit" value="">
                     </form>

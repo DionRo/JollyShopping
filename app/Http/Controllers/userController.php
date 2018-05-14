@@ -67,12 +67,10 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        $admin = \App\Admin::find(1);
         $user = \App\Admin::find($id);
         $genders = ['Man', 'Vrouw'];
 
         return view('admin/editUser')
-            ->with('admin', $admin)
             ->with('user', $user)
             ->with('genders', $genders);
     }

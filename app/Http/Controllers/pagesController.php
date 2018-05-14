@@ -23,12 +23,8 @@ class pagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function checkOut(Request $request)
+    public function checkOut()
     {
-        $request->validate([
-            'specify' => 'required'
-        ]);
-
         if(!Session::has('cart'))
         {
             return view('shoppingcart');
@@ -55,7 +51,6 @@ class pagesController extends Controller
            $newOrder->product_id = $item["item"]->id;
            $newOrder->amountOrder = $item["qty"];
            $newOrder->totalPrice = $cart->totalPrice;
-           $newOrder->specify = $request->specify;
 
            $newOrder->save();
 
@@ -98,8 +93,7 @@ class pagesController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return back();
-
+        return back()->with('succes' , 'Product toegevoegd aan winkelwagen!');
     }
     public function getAddToCart(Request $request, $id)
     {
@@ -110,8 +104,7 @@ class pagesController extends Controller
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
-        return back();
-
+        return back()->with('status' , 'Product toegevoegd aan winkelwagen!');
     }
     public function addUpProduct (Request $request, $id)
     {
@@ -498,9 +491,6 @@ class pagesController extends Controller
             ->with('jewerliesFavored', $jewerliesFavored);
     }
 
-    /**
-     *
-     */
     public function clothingOverview()
     {
         $admin = \App\Admin::find(1);
@@ -511,10 +501,6 @@ class pagesController extends Controller
             ->with('clothes', $clothes);
     }
 
-
-    /**
-     *
-     */
     public function accessoriesOverview()
     {
         $admin = \App\Admin::find(1);
@@ -525,21 +511,42 @@ class pagesController extends Controller
             ->with('accessories', $accessories);
     }
 
-    /**
-     *
-     */
     public function orderOverview()
     {
         $admin = \App\Admin::find(1);
-        $warehouseProducts = \App\Order::
+        $warehouseProductsNew = \App\Order::
         select('orderId','user_id', 'totalPrice', 'isProcessed')
+            ->where('isProcessed' , '=' , 0)
+            ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
+            ->paginate(6);
+
+        $warehouseProductsUnpayed = \App\Order::
+        select('orderId','user_id', 'totalPrice', 'isProcessed')
+            ->where('isProcessed' , '=' , 1)
+            ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
+            ->paginate(6);
+
+        $warehouseProductsPayed = \App\Order::
+        select('orderId','user_id', 'totalPrice', 'isProcessed')
+            ->where('isProcessed' , '=' , 2)
+            ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
+            ->paginate(6);
+
+        $warehouseProductsSend = \App\Order::
+        select('orderId','user_id', 'totalPrice', 'isProcessed')
+            ->where('isProcessed' , '=' , 3)
             ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
             ->paginate(6);
 
         return view('admin/ordersOverview')
             ->with('admin', $admin)
-            ->with('orders', $warehouseProducts);
+            ->with('ordersNew', $warehouseProductsNew)
+            ->with('ordersUnpayed', $warehouseProductsUnpayed)
+            ->with('ordersPayed', $warehouseProductsPayed)
+            ->with('ordersSend', $warehouseProductsSend);
+
     }
+
     public function adminDetail($id)
     {
         $admin = \App\Admin::find(1);

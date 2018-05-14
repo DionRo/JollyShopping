@@ -3,9 +3,9 @@
 @section('content')
 
     <div class="clothes-overview">
-        <h4>Overzicht Orders</h4>
+        <h4>Overzicht nieuwe orders</h4>
         <ul class="overview">
-            @foreach($orders as $order)
+            @foreach($ordersNew as $order)
                 <li>
                     <div class="flex">
                         <div>
@@ -23,6 +23,69 @@
                 </li>
             @endforeach
         </ul>
-        {{$orders->links()}}
+        {{$ordersNew->links()}}
+        <h4>Overzicht gefactureerd &amp; niet betaalde orders</h4>
+        <ul class="overview">
+            @foreach($ordersUnpayed as $orderUnpayed)
+                <li>
+                    <div class="flex">
+                        <div>
+                            <h5>Bestelling van: {{$orderUnpayed->user->firstname}} {{$orderUnpayed->user->lastname}}</h5>
+                            <p>Totaalprijs: {{$orderUnpayed->totalPrice}}</p>
+                            <p>Status: @switch($orderUnpayed->isProcessed) @case(1) Betaling in afwachting @break @case(2) Betaald @break @case(3) Verzonden @break @default Nieuw @break  @endswitch</p>
+                        </div>
+                    </div>
+                    <form method="get" action="{{action('pagesController@adminDetail', $orderUnpayed->orderId)}}">
+                        {{csrf_field()}}
+                        <input type="hidden" value="{{$orderUnpayed->orderId}}">
+                        <input class="view" type="image" src="../img/view.png">
+                        <input type="submit" value="">
+                    </form>
+                </li>
+            @endforeach
+        </ul>
+        {{$ordersUnpayed->links()}}
+        <h4>Overzicht gefactureerd &amp; betaalde orders</h4>
+        <ul class="overview">
+            @foreach($ordersPayed as $orderPayed)
+                <li>
+                    <div class="flex">
+                        <div>
+                            <h5>Bestelling van: {{$orderPayed->user->firstname}} {{$orderPayed->user->lastname}}</h5>
+                            <p>Totaalprijs: {{$orderPayed->totalPrice}}</p>
+                            <p>Status: @switch($orderPayed->isProcessed) @case(1) Betaling in afwachting @break @case(2) Betaald @break @case(3) Verzonden @break @default Nieuw @break  @endswitch</p>
+                        </div>
+                    </div>
+                    <form method="get" action="{{action('pagesController@adminDetail', $orderPayed->orderId)}}">
+                        {{csrf_field()}}
+                        <input type="hidden" value="{{$orderPayed->orderId}}">
+                        <input class="view" type="image" src="../img/view.png">
+                        <input type="submit" value="">
+                    </form>
+                </li>
+            @endforeach
+        </ul>
+        {{$ordersPayed->links()}}
+        <h4>Overzicht verzonden orders</h4>
+        <ul class="overview">
+            @foreach($ordersSend as $orderSend)
+                <li>
+                    <div class="flex">
+                        <div>
+                            <h5>Bestelling van: {{$orderSend->user->firstname}} {{$orderSend->user->lastname}}</h5>
+                            <p>Totaalprijs: {{$orderSend->totalPrice}}</p>
+                            <p>Status: @switch($orderSend->isProcessed) @case(1) Betaling in afwachting @break @case(2) Betaald @break @case(3) Verzonden @break @default Nieuw @break  @endswitch</p>
+                        </div>
+                    </div>
+                    <form method="get" action="{{action('pagesController@adminDetail', $orderSend->orderId)}}">
+                        {{csrf_field()}}
+                        <input type="hidden" value="{{$orderSend->orderId}}">
+                        <input class="view" type="image" src="../img/view.png">
+                        <input type="submit" value="">
+                    </form>
+                </li>
+            @endforeach
+        </ul>
+        {{$ordersSend->links()}}
     </div>
 @endsection

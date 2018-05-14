@@ -30,6 +30,7 @@
                         <input type="hidden" name="processValue" value="delete">
                         <input type="submit" value="Verwijder" @if($orders[0]->isProcessed == 3) data-active="true" @endif>
                     </form>
+                    <a href="{{ redirect('admin/ordersOverview') }}">Go Back</a>
                 </div>
                 @foreach($orders as $order)
                     <div class="flex order-item">
@@ -40,9 +41,8 @@
                             <ul>
                                 <li>{{$order->product->name}}</li>
                                 <li>Aantal: {{$order->amountOrder}}</li>
-                                <li>Prijs per stuk:&#8364</li>
+                                <li>Prijs per stuk:&#8364 {{$order->product->price}}</li>
                                 <li>Totaal:&#8364 {{$order->totalPrice}}</li>
-                                <li>{{$order->specify}}</li>
                             </ul>
                         </div>
                     </div>

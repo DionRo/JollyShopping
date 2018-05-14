@@ -2,7 +2,22 @@
 
 @section('content')
 
+    <style>
+        .alert {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+        }
+
+
+    </style>
 <div class="main-content detail-content">
+    @if (session('succes'))
+        <div class="container alert closebtn" style="padding: 10px!important; border-radius: 10px;">
+            {{ session('succes') }}
+        </div>
+    @endif
     <div class="container flex ">
         <img class="product-img" src="{{$product->picture}}" alt="product">
         <div class="product-info">
