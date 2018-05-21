@@ -102,6 +102,7 @@ class categoryController extends Controller
     {
         $clothing = \App\Category::findOrFail($id);
         $clothing->delete();
+        return back();
 
 //        $product = \App\Size::where('clothing_id', $id);
 //        $product->delete();

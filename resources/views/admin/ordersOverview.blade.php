@@ -17,6 +17,7 @@
                     <form method="get" action="{{action('pagesController@adminDetail', $order->orderId)}}">
                         {{csrf_field()}}
                         <input type="hidden" value="{{$order->orderId}}">
+                        <input type="hidden" name="userId" value="{{$order->user_id}}">
                         <input class="view" type="image" src="../img/view.png">
                         <input type="submit" value="">
                     </form>
@@ -38,6 +39,7 @@
                     <form method="get" action="{{action('pagesController@adminDetail', $orderUnpayed->orderId)}}">
                         {{csrf_field()}}
                         <input type="hidden" value="{{$orderUnpayed->orderId}}">
+                        <input type="hidden" name="userId" value="{{$orderUnpayed->user_id}}">
                         <input class="view" type="image" src="../img/view.png">
                         <input type="submit" value="">
                     </form>
@@ -59,6 +61,7 @@
                     <form method="get" action="{{action('pagesController@adminDetail', $orderPayed->orderId)}}">
                         {{csrf_field()}}
                         <input type="hidden" value="{{$orderPayed->orderId}}">
+                        <input type="hidden" name="userId" value="{{$orderPayed->user_id}}">
                         <input class="view" type="image" src="../img/view.png">
                         <input type="submit" value="">
                     </form>
@@ -80,6 +83,7 @@
                     <form method="get" action="{{action('pagesController@adminDetail', $orderSend->orderId)}}">
                         {{csrf_field()}}
                         <input type="hidden" value="{{$orderSend->orderId}}">
+                        <input type="hidden" name="userId" value="{{$orderSend->user_id}}">
                         <input class="view" type="image" src="../img/view.png">
                         <input type="submit" value="">
                     </form>

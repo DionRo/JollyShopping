@@ -32,17 +32,28 @@
                     </form>
                     <a href="{{ redirect('admin/ordersOverview') }}">Go Back</a>
                 </div>
+                <ul>
+                    <li>Gebruikers informatie</li>
+                    <li>Naam: {{$user[0]->firstname}} {{$user[0]->middlename}} {{$user[0]->lastname}}</li>
+                    <li>Adres: {{$user[0]->adress}}</li>
+                    <li>Postcode: {{$user[0]->zipcode}}</li>
+                    <li>Land: {{$user[0]->country}}</li>
+                </ul>
                 @foreach($orders as $order)
                     <div class="flex order-item">
                         <div>
-                            <img src="{{$order->product->picture}}" alt="">
+                            <img src="{{$order->Product->picture}}" alt="">
                         </div>
                         <div>
                             <ul>
-                                <li>{{$order->product->name}}</li>
+                                <li>{{$order->Product->name}}</li>
                                 <li>Aantal: {{$order->amountOrder}}</li>
-                                <li>Prijs per stuk:&#8364 {{$order->product->price}}</li>
+                                <li>Prijs per stuk:&#8364 {{$order->Product->price}}</li>
                                 <li>Totaal:&#8364 {{$order->totalPrice}}</li>
+                                @if ($order->alterSendAdress != null)
+                                    <li>PAS OP! VERZENDADRES AANGEPAST!!</li>
+                                    <li style="font-size: 15px;">NIEUW ADRES IS! = {{$order->alterSendAdress}} </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

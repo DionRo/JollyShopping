@@ -37,6 +37,13 @@
                         <label for="stock">Voorraad</label>
                         <input type="text" name="stock" id="stock" value="{{$product->stock}}" required>
                     </div>
+                    <div class="form-group flex flex-between">
+                        <label for="isSendable">Is verstuurbaar </label>
+                        <select name="isSendable">
+                            <option value="1">Ja</option>
+                            <option value="0">Nee</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <div class="form-group flex flex-column">

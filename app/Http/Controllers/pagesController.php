@@ -23,7 +23,7 @@ class pagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function checkOut()
+    public function checkOut(Request $request)
     {
         if(!Session::has('cart'))
         {
@@ -52,11 +52,22 @@ class pagesController extends Controller
            $newOrder->amountOrder = $item["qty"];
            $newOrder->totalPrice = $cart->totalPrice;
 
+           if ($request->adres == "Adres + Postcode!")
+           {
+               $request->adres = null;
+               $newOrder->alterSendAdress = $request->adres;
+           }elseif ($request->adres == ""){
+               $request->adres = null;
+               $newOrder->alterSendAdress = $request->adres;
+           }
+           else{
+               $newOrder->alterSendAdress = $request->adres;
+           }
            $newOrder->save();
 
         }
         session()->forget('cart');
-        return 'hi';
+        return back()->with('status-checkout' , 'U heeft succes vol een bestelling geplaatst! De factuur komt spoedig binnen!');
     }
     public function getCart()
     {
@@ -178,16 +189,16 @@ class pagesController extends Controller
         $headers = "FROM: ". $email;
 
         mail($to,$subject,$txt,$headers);
-        
+
         return view('/contact');
-        
+
     }
     /**
      * @return string
      */
     public function products()
     {
-        $products = \App\Product::orderByDesc('created_at')->paginate(9);
+        $products = \App\Product::orderByDesc('created_at')->where('stock' ,'>', '0' )->paginate(9);
 
         return view('products')
             ->with('products', $products);
@@ -268,20 +279,20 @@ class pagesController extends Controller
                     $filterSizes = $sizes::where('size', '=', 'S')->get();
                     $amountSizes = $filterSizes->count();
                     $i = 1;
-                    
+
                     if($amountSizes > 0){
                         foreach($filterSizes as $filterSize){
                             array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
-    
+
                             if($i != $amountSizes){
                                 array_push($sizesList, '||');
                             }
-    
+
                             $i++;
                         }
 
                         if($request->sizeM == "on" || $request->sizeL == "on" || $request->sizeXL == "on"){ array_push($sizesList, '||'); };
-                        
+
                         $full = $clothing::filterClothes($sizesList, $full);
                     }
 
@@ -291,23 +302,23 @@ class pagesController extends Controller
                     $filterSizes = $sizes::where('size', '=', 'M')->get();
                     $amountSizes = $filterSizes->count();
                     $i = 1;
-                    
+
                     if($amountSizes > 0){
 
-                        if($request->sizeS == "on"){ array_push($sizesList, '||'); };                        
-                        
+                        if($request->sizeS == "on"){ array_push($sizesList, '||'); };
+
                         foreach($filterSizes as $filterSize){
                             array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
-    
+
                             if($i != $amountSizes){
                                 array_push($sizesList, '||');
                             }
-    
+
                             $i++;
                         }
-    
+
                         if($request->sizeL == "on" || $request->sizeXL == "on"){ array_push($sizesList, '||'); };
-                        
+
                         $full = $clothing::filterClothes($sizesList, $full);
                     }
                 }
@@ -315,21 +326,21 @@ class pagesController extends Controller
                     $filterSizes = $sizes::where('size', '=', 'L')->get();
                     $amountSizes = $filterSizes->count();
                     $i = 1;
-                    
+
                     if($amountSizes > 0){
-                        
-                        if($request->sizeS == "on" || $request->sizeM == "on"){ array_push($sizesList, '||'); };                        
-                        
+
+                        if($request->sizeS == "on" || $request->sizeM == "on"){ array_push($sizesList, '||'); };
+
                         foreach($filterSizes as $filterSize){
                             array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
-    
+
                             if($i != $amountSizes){
                                 array_push($sizesList, '||');
                             }
-    
+
                             $i++;
                         }
-                        
+
                         $full = $clothing::filterClothes($sizesList, $full);
                     }
                 }
@@ -337,18 +348,18 @@ class pagesController extends Controller
                     $filterSizes = $sizes::where('size', '=', 'XL')->get();
                     $amountSizes = $filterSizes->count();
                     $i = 1;
-                    
+
                     if($amountSizes > 0){
 
-                        if($request->sizeS == "on" || $request->sizeM == "on" || $request->sizeL == "on"){ array_push($sizesList, '||'); };                        
-                        
+                        if($request->sizeS == "on" || $request->sizeM == "on" || $request->sizeL == "on"){ array_push($sizesList, '||'); };
+
                         foreach($filterSizes as $filterSize){
                             array_push($sizesList, 'id', '=', $filterSize['clothing_id']);
-    
+
                             if($i != $amountSizes){
                                 array_push($sizesList, '||');
                             }
-    
+
                             $i++;
                         }
                         $full = $clothing::filterClothes($sizesList, $full);
@@ -361,7 +372,7 @@ class pagesController extends Controller
                         ->paginate(9);
                 } else {
                     $products = \App\Product::where('type', '=', 'clothing');
-                }   
+                }
 //dd($products);
                 break;
 
@@ -524,19 +535,19 @@ class pagesController extends Controller
         select('orderId','user_id', 'totalPrice', 'isProcessed')
             ->where('isProcessed' , '=' , 1)
             ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
-            ->paginate(6);
+            ->paginate(6 ,'*', 'ordersUnpayed');
 
         $warehouseProductsPayed = \App\Order::
         select('orderId','user_id', 'totalPrice', 'isProcessed')
             ->where('isProcessed' , '=' , 2)
             ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
-            ->paginate(6);
+            ->paginate(6, '*', 'ordersPayed');
 
         $warehouseProductsSend = \App\Order::
         select('orderId','user_id', 'totalPrice', 'isProcessed')
             ->where('isProcessed' , '=' , 3)
             ->groupBy('orderId', 'user_id', 'totalPrice', 'isProcessed')
-            ->paginate(6);
+            ->paginate(6 , '*', 'ordersSend');
 
         return view('admin/ordersOverview')
             ->with('admin', $admin)
@@ -547,13 +558,17 @@ class pagesController extends Controller
 
     }
 
-    public function adminDetail($id)
+    public function adminDetail(Request $request , $id)
     {
         $admin = \App\Admin::find(1);
         $orders = \App\Order::select('*')->where('orderId', '=', $id)->get();
+        $user = \App\User::select('*')->where('id', '=', $request->userId)->get();
+
         return view('/admin/showOrder')
             ->with('admin', $admin)
-            ->with('orders', $orders);
+            ->with('orders', $orders)
+            ->with('user' , $user);
+
     }
 
     public function orderProcess($id, Request $request){

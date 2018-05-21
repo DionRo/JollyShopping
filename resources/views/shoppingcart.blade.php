@@ -1,5 +1,21 @@
 @extends('master/master')
-
+<style>
+    input[type=text] {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .alert {
+       background-color: #4CAF50;
+       color: white;
+        font-size: 25px;
+       text-align: center;
+        }
+</style>
 @section('content')
     @if(Session::has('cart'))
  <div class="main-content">
@@ -41,16 +57,30 @@
                 @endforeach
             </ul>
             <div style="text-align: center">
+                <p style="font-size: 20px;">Huidige verzendadres: {{Auth::user()->adress}} , {{Auth::user()->zipcode}} , {{Auth::user()->country}}</p>
+                <p>Vul het alternatieve adres in als het huidge verzendadres niet klopt</p>
                 <input id="buttonTotal" value="Totaal prijs: {{$totalPrice}}"readonly >
                 <form action="{{action('pagesController@checkOut')}}" method="post">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label style="font-size: 20px;" for="adres">Alternatief verzendadres</label>
+                        <br>
+                        <input type="text" name="adres" id="adres" value="Adres + Postcode!" required>
+                    </div>
                     <input id="button" type="submit" value="Checkout">
                 </form>
             </div>
         </div>
     @else
          <div class="catalogus">
+             <br/>
              <div class="container" style="text-align: center">
-                 <h2 style="font-size: 40px;">Uw winkelwagen is leeg</h2>
+                 @if (session('status-checkout'))
+                     <div class=" alert closebtn" style="padding: 25px!important; border-radius: 10px;">
+                         {{ session('status-checkout') }}
+                     </div>
+                 @endif
+                 <h2 style="font-size: 40px;color: Gray;">Uw winkelwagen is leeg</h2>
                  <p>Ga deze snel vullen op de <a href="/products">PRODUCTEN</a> pagina</p>
              </div>
          </div>

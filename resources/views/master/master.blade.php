@@ -99,9 +99,9 @@
             </form>
         @endif
         <ul class="flex flex-between">
-            <li><a href=""><i class="fab fa-facebook-f" aria-hidden="true" style="color: #EB807D;"></i></a></li>
-            <li><a href=""><i class="fab fa-twitter" aria-hidden="true" style="color: #EB807D;"></i></a></li>
-            <li><a href=""><i class="fab fa-linkedin-in" aria-hidden="true" style="color: #EB807D;"></i></a></li>
+            <li><a href="https://www.facebook.com/Jolly-Shopping-1650332354983702/" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true" style="color: #EB807D;"></i></a></li>
+            <li><a href="https://www.instagram.com/jolanda_rodie/?hl=nl" target="_blank"><i class="fab fa-instagram" aria-hidden="true" style="color: #EB807D;"></i></a></li>
+            <li><a href="https://twitter.com/jollyshopping3" target="_blank"><i class="fab fa-twitter" aria-hidden="true" style="color: #EB807D;"></i></a></li>
         </ul>
         <div class="copyright">
             <p>Jolly Shopping &copy; 2017 - <a href="https://crucialdesigns.nl" target="_blank">Crucial Designs</a></p>

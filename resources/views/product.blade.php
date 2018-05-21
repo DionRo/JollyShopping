@@ -31,6 +31,11 @@
             @else
                 <p class="stock">Er zijn nog {{$product->stock}} stuks op voorraad</p>
             @endif
+            @if($product->isSendable == 0)
+                <p class="stock">Dit product wordt niet verzonden!</p>
+            @elseif($product->isSendable == 1)
+                <p class="stock">Dit product wordt wel verzonden!</p>
+            @endif
             @if(isset($sizes))
                 <h3 class="size">Maten</h3>
                 <ul class="sizes flex">
@@ -46,9 +51,14 @@
             <h3 class="description">Beschrijving</h3>
             <p>{{$product->description}}</p>
             <br>
+            <div class="addCartContainer">
+                <form action="{{action('pagesController@products')}}">
+                    <input type="submit" class="addCartDetail" value="Ga Terug" >
+                </form>
+            </div>
         </div>
     </div>
-    @if(Auth::Check() == True)
+    @if(Auth::Check() == True && $product->stock > 0)
         <div class="addCartContainer">
             <form action="{{action('pagesController@getAddToCartDetail', $product->id)}}">
                 @if(isset($sizes))

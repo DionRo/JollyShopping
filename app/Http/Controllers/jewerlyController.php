@@ -77,6 +77,7 @@ class jewerlyController extends Controller
         $accessories->price = $request->price;
         $accessories->stock = $request->stock;
         $accessories->description = $request->description;
+        $accessories->isSendable = $request->isSendable;
         $accessories->type = 'jewerly';
 
         $path = $request->file('image');
@@ -196,6 +197,7 @@ class jewerlyController extends Controller
         $accessories->category_id = $request->category;
         $accessories->price = $request->price;
         $accessories->stock = $request->stock;
+        $accessories->isSendable = $request->isSendable;
         $accessories->description = $request->description;
 
         if($request->discount > 0)

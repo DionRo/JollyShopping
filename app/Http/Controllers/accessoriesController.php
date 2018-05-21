@@ -79,6 +79,7 @@ class accessoriesController extends Controller
         $accessories->price = $request->price;
         $accessories->stock = $request->stock;
         $accessories->description = $request->description;
+        $accessories->isSendable = $request->isSendable;
         $accessories->type = 'accessory';
 
         $path = $request->file('image');
@@ -200,6 +201,7 @@ class accessoriesController extends Controller
         $accessories->category_id = $request->category;
         $accessories->price = $request->price;
         $accessories->stock = $request->stock;
+        $accessories->isSendable = $request->isSendable;
         $accessories->description = $request->description;
 
         if($request->discount > 0)
